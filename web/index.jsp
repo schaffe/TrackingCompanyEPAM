@@ -14,14 +14,14 @@
     </head>
     <body>
         <form>
-            <select id="language" name="language" onchange="submit()">
+            <select action="index.jsp" id="language" name="language" onchange="submit()">
                 <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
                 <option value="uk" ${language == 'uk' ? 'selected' : ''}>Українська</option>
             </select>
         </form>
 
         <div class="login_main">
-            <form action = "./command" method = "GET" >
+            <form action="command" method="POST" >
                 <input type="hidden" name="action" value="auth">
                 <fmt:message key="epam.login.login"/><br>
                 <input name="login" type="text" /><br>

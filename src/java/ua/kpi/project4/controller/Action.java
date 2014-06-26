@@ -5,8 +5,8 @@
  */
 package ua.kpi.project4.controller;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * In object-oriented programming, the command pattern is a behavioral design
@@ -19,5 +19,6 @@ import javax.servlet.ServletResponse;
  */
 public interface Action {
 
-    String execute(ServletRequest request);
+    String execute(View view);
+    boolean isForward();
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ua.kpi.project4.controller;
 
 import java.io.IOException;
@@ -17,20 +16,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "CommandServlet", urlPatterns = {"/command"})
 public class CommandServlet extends HttpServlet {
 
-    private final static String COMMAND_STR = "action";
-    private final Map<String,Action> actionMap = new HashMap<>();
+    private ActionFactory factory;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        actionMap.put(ActionAuth.ACTION, new ActionAuth());
+        factory = new ActionFactory();
     }
-    
-    
+
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,11 +41,15 @@ public class CommandServlet extends HttpServlet {
             throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
         
-        String command = request.getParameter(COMMAND_STR);
-        Action action = actionMap.get(command);
-        String view = action.execute(request);
-        RequestDispatcher rd = request.getRequestDispatcher(view);
-        rd.forward(request, response);
+        View view = new View(request, response);
+        Action action = factory.getAction(request);
+        String redirectPage = action.execute(view);
+        
+        if (action.isForward()) {
+            request.getRequestDispatcher(redirectPage).forward(request, response);
+        } else {
+            response.sendRedirect(redirectPage);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
