@@ -8,6 +8,9 @@ package ua.kpi.project4.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CommandServlet", urlPatterns = {"/command"})
 public class CommandServlet extends HttpServlet {
 
-    private final static String COMMAND_STR = "command";
+    private final static String COMMAND_STR = "action";
+    private final Map<String,Action> actionMap = new HashMap<>();
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        actionMap.put(ActionAuth.ACTION, new ActionAuth());
+    }
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,23 +41,14 @@ public class CommandServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
-        request.getParameter("command");
         
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CommandServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CommandServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String command = request.getParameter(COMMAND_STR);
+        Action action = actionMap.get(command);
+        String view = action.execute(request);
+        RequestDispatcher rd = request.getRequestDispatcher(view);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

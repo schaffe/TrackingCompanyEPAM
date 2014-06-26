@@ -13,7 +13,7 @@
     <body>
         welcome, 
         <%
-            String name = (String) request.getAttribute("Name");
+            String name = (String) request.getAttribute("login");
             if (name != null) {
                 out.print(name);
             }

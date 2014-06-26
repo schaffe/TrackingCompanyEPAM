@@ -1,38 +1,36 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
- <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="bundle" />
 
-<html>
+<!DOCTYPE html>
+<html lang="${language}">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-        <title>Login page</title>
+        <title><fmt:message key="epam.login.title"/></title>
     </head>
     <body>
-        <c:choose>   
+        <form>
+            <select id="language" name="language" onchange="submit()">
+                <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                <option value="uk" ${language == 'uk' ? 'selected' : ''}>Українська</option>
+            </select>
+        </form>
 
-            <c:when test="${not empty sessionScope.username}">
-                
-                <h1>Hello, ${sessionScope.username}!</h1>
-                <form action="./default">
-                    <input name="command" type="submit" value="Exit" />
-                </form>
-            </c:when>
-            <c:otherwise>
-                <div class="login_main">
-                    <form action = "./default" method = "GET" >
-                        Login<br>
-                        <input name="login" type="text" />
-                        <br>Password<br>
-                        <input name="password" type="password" />
-                        <br>
-                        <input name="command" type="submit" value="Sign In" />
-                    </form>
-                </div>
-            </c:otherwise>
-        </c:choose>
-
+        <div class="login_main">
+            <form action = "./command" method = "GET" >
+                <input type="hidden" name="action" value="auth">
+                <fmt:message key="epam.login.login"/><br>
+                <input name="login" type="text" /><br>
+                <fmt:message key="epam.login.password"/><br>
+                <input name="password" type="password" /><br>
+                <fmt:message key="epam.login.sign_in" var="buttonValue" />
+                <input type="submit" value="${buttonValue}" />
+            </form>
+        </div>
     </body>
 
 
