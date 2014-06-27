@@ -17,7 +17,7 @@
     <body>
         welcome, 
         <%
-            String name = (String) request.getAttribute("login");
+            String name = (String) request.getAttribute("name");
             if (name != null) {
                 out.print(name);
                 out.print(request.getSession().getAttribute(SessionParameters.USER_ID));
