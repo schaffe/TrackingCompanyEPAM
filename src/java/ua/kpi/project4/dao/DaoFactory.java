@@ -2,18 +2,17 @@ package ua.kpi.project4.dao;
 
 
 import java.sql.Connection;
-import java.sql.SQLException;
+import ua.kpi.project4.dao.applications.ApplicationsDAO;
+import ua.kpi.project4.dao.useraccounts.UserAccountsDAO;
 
-/** Фабрика объектов для работы с базой данных */
-public interface DaoFactory<Context> {
-
-    public interface DaoCreator<Context> {
-        public GenericDao create(Context context);
+public abstract class DaoFactory {
+    private static DaoFactory currentFactory = new MySqlDaoFactory();
+    
+    public abstract Connection getConnection();
+    public abstract UserAccountsDAO getUserAccountsDAO(Connection c);
+    public abstract ApplicationsDAO getApplicationsDAO(Connection c);
+    
+    public static DaoFactory getDaoFactory() {
+        return currentFactory;
     }
-
-    /** Возвращает подключение к базе данных */
-    public Context getContext() throws PersistException;
-
-    /** Возвращает объект для управления персистентным состоянием объекта */
-    public GenericDao getDao(Context context, Class dtoClass) throws PersistException;
 }
