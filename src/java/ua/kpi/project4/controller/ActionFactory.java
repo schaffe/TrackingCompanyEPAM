@@ -5,25 +5,31 @@
  */
 package ua.kpi.project4.controller;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import ua.kpi.project4.Constants;
 
 /**
  *
  * @author User
  */
-public class ActionFactory {
-    private final static String COMMAND_STR = "action";
-    private final Map<String, Action> actionMap;
+public class ActionFactory implements Constants {
+
+    private final Map<Commands, Action> actionMap;
 
     public ActionFactory() {
-        actionMap = new HashMap<>();
-        actionMap.put(ActionAuth.ACTION, new ActionAuth());
-        actionMap.put(ActionLogout.ACTION, new ActionLogout());
+        actionMap = new EnumMap<>(Commands.class);
+        actionMap.put(Commands.AUTH, new ActionAuth());
+        actionMap.put(Commands.LOGOUT, new ActionLogout());
+        actionMap.put(Commands.NOACTION, new ActionNoAction());
     }
 
     public Action getAction(HttpServletRequest request) {
-        return actionMap.get(request.getParameter(COMMAND_STR));
+        String action = request.getParameter(RequestParameters.COMMAND_STR);
+        if (action.isEmpty()) {
+            action = Commands.NOACTION.name();
+        }
+        return actionMap.get(Commands.valueOf(action));
     }
 }

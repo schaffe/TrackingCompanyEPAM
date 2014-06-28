@@ -8,26 +8,18 @@ package ua.kpi.project4.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import ua.kpi.project4.Constants;
 
 /**
  *
  * @author User
  */
-public class ActionLogout implements Action, SessionParameters {
-    public static final String ACTION = "logout";
-    public static final String REDIRECT = "./index.jsp";
+public class ActionLogout implements Action {
     
     @Override
     public String execute(View view){
         HttpSession session = view.getRequest().getSession();
         session.invalidate();
-        return REDIRECT;
-    }
-
-    @Override
-    public boolean isForward() {
-        return false;
-    }
-    
-    
+        return Pages.INDEX;
+    }   
 }

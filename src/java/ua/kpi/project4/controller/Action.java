@@ -6,6 +6,7 @@
 package ua.kpi.project4.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import ua.kpi.project4.Constants;
 
 
 /**
@@ -17,8 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  * includes the method name, the object that owns the method and values for the
  * method parameters.
  */
-public interface Action {
+public interface Action extends Constants {
 
     String execute(View view);
-    boolean isForward();
 }

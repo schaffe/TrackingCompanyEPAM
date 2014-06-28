@@ -7,6 +7,7 @@ package ua.kpi.project4.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import ua.kpi.project4.Constants;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.UserAccounts;
 
@@ -14,16 +15,13 @@ import ua.kpi.project4.model.UserAccounts;
  *
  * @author User
  */
-public class ActionAuth implements Action, SessionParameters {
-
-    public static final String ACTION = "auth";
-    public static final String REDIRECT = "./welcomePage.jsp";
+public class ActionAuth implements Action {
 
     @Override
     public String execute(View view) {
         HttpServletRequest request = view.getRequest();
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        String login = request.getParameter(RequestParameters.LOGIN);
+        String password = request.getParameter(RequestParameters.PASSWORD);
 
         try {
             DaoFactory daoFactory = DaoFactory.getDaoFactory();
@@ -31,20 +29,14 @@ public class ActionAuth implements Action, SessionParameters {
             if (password.equals(account.getPassword())) {
                 int userId = account.getUserAccountId();
                 String name = account.getFullName();
-                request.setAttribute("name", name);
+                request.setAttribute(RequestParameters.FULLNAME, name);
                 HttpSession session = request.getSession(true);
-                session.setAttribute(USER_ID, new Integer(userId));
-                return REDIRECT;
+                session.setAttribute(SessionParameters.USER_ID, new Integer(userId));
+                return Pages.WELCOME_PAGE;
             }
         } catch (IllegalArgumentException e) {
         }
 
-        return "./index.jsp";
+        return Pages.INDEX;
     }
-
-    @Override
-    public boolean isForward() {
-        return true;
-    }
-
 }

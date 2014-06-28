@@ -10,6 +10,11 @@ package ua.kpi.project4.controller;
  *
  * @author User
  */
-public interface SessionParameters {
-    String USER_ID = "user_id";
+public class ActionNoAction implements Action {
+
+    @Override
+    public String execute(View view) {
+        return Pages.INDEX;
+    }
+    
 }

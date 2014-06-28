@@ -44,12 +44,8 @@ public class CommandServlet extends HttpServlet {
         View view = new View(request, response);
         Action action = factory.getAction(request);
         String redirectPage = action.execute(view);
-        
-        if (action.isForward()) {
-            request.getRequestDispatcher(redirectPage).forward(request, response);
-        } else {
-            response.sendRedirect(redirectPage);
-        }
+        request.getRequestDispatcher(redirectPage).forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

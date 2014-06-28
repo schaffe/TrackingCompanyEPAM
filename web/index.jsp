@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<%@ page import="ua.kpi.project4.Constants" %>
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="bundle" />
 
@@ -21,12 +22,12 @@
         </form>
 
         <div class="login_main">
-            <form action="command" method="POST" >
-                <input type="hidden" name="action" value="auth">
+            <form action="<%=Constants.ACTION%>" method="POST" >
+                <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.AUTH%>">
                 <fmt:message key="epam.login.login"/><br>
-                <input name="login" type="text" /><br>
+                <input name="<%=Constants.RequestParameters.LOGIN%>" type="text" /><br>
                 <fmt:message key="epam.login.password"/><br>
-                <input name="password" type="password" /><br>
+                <input name="<%=Constants.RequestParameters.PASSWORD%>" type="password" /><br>
                 <fmt:message key="epam.login.sign_in" var="buttonValue" />
                 <input type="submit" value="${buttonValue}" />
             </form>
