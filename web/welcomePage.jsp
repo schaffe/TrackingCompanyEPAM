@@ -14,20 +14,11 @@
         <title><fmt:message key="epam.welcome.title"/></title>
     </head>
     <body>
-        <fmt:message key="epam.welcome.welcome"/> <c:set var="name" value="${param}"/>
-        <c:out value="${name}" />
-        <c:forEach var="pname" items="${param}">  
-                        <tr>  
-                            <td>  
-                                <c:out value="${pname}" />  
-                            </td>  
-                            <td><c:out value="" /><!-- print param value here --></td>  
-                        </tr>           
-                    </c:forEach>  
+        <fmt:message key="epam.welcome.welcome"/> <c:out value="${requestScope.fullname}"/>
+
         <!-- Logout button -->
-        <form action="command">
-            <c:set var="act" value="logout"/>
-            <input type="hidden" name="action" value="${act}">
+        <form action="<%=Constants.ACTION%>" method="POST" >
+            <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.LOGOUT%>">
             <fmt:message key="epam.text.logout" var="buttonLogout" />
             <input type="submit" value="${buttonLogout}">
         </form>

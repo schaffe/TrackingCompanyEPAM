@@ -26,10 +26,17 @@ public class ActionFactory implements Constants {
     }
 
     public Action getAction(HttpServletRequest request) {
-        String action = request.getParameter(RequestParameters.COMMAND_STR);
-        if (action.isEmpty()) {
-            action = Commands.NOACTION.name();
+        if (request.getParameter(RequestParameters.COMMAND_STR) != null) {
+            String action = request.getParameter(RequestParameters.COMMAND_STR);
+            Commands actionKey;
+            try {
+                actionKey = Commands.valueOf(action);
+            } catch (IllegalArgumentException e) {
+                actionKey = Commands.NOACTION;
+            }
+            return actionMap.get(actionKey);
+        } else {
+            return actionMap.get(Commands.NOACTION);
         }
-        return actionMap.get(Commands.valueOf(action));
     }
 }
