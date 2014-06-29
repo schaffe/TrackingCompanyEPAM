@@ -31,6 +31,7 @@ public class MySqlCarsDaoImpl implements CarsDAO {
     public static final String REG_NUM = TABLE + ".RegistrationNumber";
     public static final String PLACES_NUM = TABLE + ".PlacesNumber";
     public static final String IS_VALID = TABLE + ".isValid";
+    public static final String MODEL = TABLE + ".Model";
 
     private final Connection connection;
 
@@ -43,7 +44,7 @@ public class MySqlCarsDaoImpl implements CarsDAO {
 
         String[] tables = new String[]{TABLE};
         LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
-        String[] fields = {ID, REG_NUM, PLACES_NUM, IS_VALID};
+        String[] fields = {ID, REG_NUM, PLACES_NUM, IS_VALID, MODEL};
         String sql = MySqlUtility.createSelectStatment(tables, conditions, fields);
 
         try (PreparedStatement statement = connection.prepareStatement(sql);
@@ -54,7 +55,8 @@ public class MySqlCarsDaoImpl implements CarsDAO {
                         result.getInt(ID),
                         result.getString(REG_NUM),
                         result.getInt(PLACES_NUM),
-                        result.getBoolean(IS_VALID)
+                        result.getBoolean(IS_VALID),
+                        result.getString(MODEL)
                 );
                 Logger.getLogger(MySqlCarsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
                 carsList.add(application);
@@ -74,7 +76,7 @@ public class MySqlCarsDaoImpl implements CarsDAO {
         String[] tables = new String[]{TABLE};
         LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
         conditions.put(ID, "?");
-        String[] fields = {ID, REG_NUM, PLACES_NUM, IS_VALID};
+        String[] fields = {ID, REG_NUM, PLACES_NUM, IS_VALID, MODEL};
         String sql = MySqlUtility.createSelectStatment(tables, conditions, fields);
 
         try (PreparedStatement statement = connection.prepareStatement(sql);) {
@@ -85,7 +87,8 @@ public class MySqlCarsDaoImpl implements CarsDAO {
                             result.getInt(ID),
                             result.getString(REG_NUM),
                             result.getInt(PLACES_NUM),
-                            result.getBoolean(IS_VALID)
+                            result.getBoolean(IS_VALID),
+                            result.getString(MODEL)
                     );
                     Logger.getLogger(MySqlCarsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
 

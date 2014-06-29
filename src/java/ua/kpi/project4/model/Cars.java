@@ -21,23 +21,31 @@ public class Cars implements Serializable {
     private String registrationNumber;
     private int placesNumber;
     private Boolean isValid;
-
+    private String model;
+    
     public Cars() {
     }
 
     public Cars(Integer carId) {
         this.carId = carId;
     }
-    
 
-    public Cars(Integer carId, String registrationNumber, int placesNumber, Boolean isValid) {
+    public Cars(Integer carId, String registrationNumber, int placesNumber, Boolean isValid, String model) {
         this.carId = carId;
         this.registrationNumber = registrationNumber;
         this.placesNumber = placesNumber;
         this.isValid = isValid;
+        this.model = model;
     }
 
+    public String getModel() {
+        return model;
+    }
 
+    public void setModel(String model) {
+        this.model = model;
+    }
+    
 
     public Integer getCarId() {
         return carId;

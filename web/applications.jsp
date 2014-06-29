@@ -17,22 +17,24 @@
         <table border="1">
             <caption><fmt:message key="epam.a.title"/></caption>
             <tr>
-                <th><fmt:message key="epam.a.id"/></th>
+                <th><fmt:message key="epam.a.date_create"/></th>
                 <th><fmt:message key="epam.a.from"/></th>
                 <th><fmt:message key="epam.a.where"/></th>
                 <th><fmt:message key="epam.a.arrival_time"/></th>
+                <th><fmt:message key="epam.a.places"/></th>
                 <th><fmt:message key="epam.a.status"/></th>
             </tr>
 
             <c:set var='application_list' value="<%=Constants.RequestParameters.APPLICATIONS%>" />
             <c:forEach var="application" items="${requestScope[application_list]}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.VIEW_APPLICATION%>&<%=Constants.RequestParameters.ID%>=${application.applicationId}">
-                            <c:out value="${application.applicationId}"/></a></td>
+                    <td><c:out value="${application.dateCreate}"/></td>
                     <td><c:out value="${application.from}"/></td>
                     <td><c:out value="${application.destination}"/></td>
                     <td><c:out value="${application.arrivalTime}"/></td>
-                    <td><c:out value="${application.status}"/></td>
+                    <td><c:out value="${application.passengersNum}"/></td>
+                    <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.VIEW_APPLICATION%>&<%=Constants.RequestParameters.ID%>=${application.applicationId}">
+                            <c:out value="${application.status}"/></a></td>
                 </tr>
             </c:forEach>
         </table>

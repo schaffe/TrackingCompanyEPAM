@@ -95,7 +95,7 @@ public class MySqlApplicationsDaoImpl implements ApplicationsDAO {
         LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
         conditions.put(ID, "?");
         String[] fields = {ID, CREATOR_ID, FROM, DESTINATION, ARRIVAL_TIME, PASSENGERS_NUM, STATUS, DRIVER_ID, DATE_CREATE};
-        String sql = MySqlUtility.createSelectStatment(tables, conditions, fields);
+        String sql = MySqlUtility.createSelectStatment(tables, conditions, fields) + " ORDER BY " + DATE_CREATE;
 
         try (PreparedStatement statement = connection.prepareStatement(sql);) {
             statement.setInt(1, id);
