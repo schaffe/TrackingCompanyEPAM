@@ -25,6 +25,8 @@ public class Applications implements Serializable {
     private Date arrivalTime;
     private int passengersNum;
     private Constants.ApplicationStatus status;
+    private int driverId;
+    private Date dateCreate;
 
     public Applications() {
     }
@@ -35,7 +37,7 @@ public class Applications implements Serializable {
 
     public Applications(Integer applicationId, int creatorUserAccountID, 
             String from, String destination, Date arrivalTime, int passengersNum, 
-            String status) {
+            String status, int driverId, Date dateCreate) {
         this.applicationId = applicationId;
         this.creatorUserAccountID = creatorUserAccountID;
         this.from = from;
@@ -43,6 +45,8 @@ public class Applications implements Serializable {
         this.arrivalTime = arrivalTime;
         this.passengersNum = passengersNum;
         this.status = Constants.ApplicationStatus.valueOf(status);
+        this.driverId = driverId;
+        this.dateCreate = dateCreate;
     }
 
     public Integer getApplicationId() {
@@ -101,6 +105,23 @@ public class Applications implements Serializable {
         this.status = Constants.ApplicationStatus.valueOf(status);
     }
 
+    public int getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(int driverId) {
+        this.driverId = driverId;
+    }
+
+    public Date getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(Date dateCreate) {
+        this.dateCreate = dateCreate;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

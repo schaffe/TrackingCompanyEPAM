@@ -64,5 +64,4 @@ public class MySqlDaoFactory extends DaoFactory {
         return new MySqlApplicationsDaoImpl(c);
     }
 
-
 }

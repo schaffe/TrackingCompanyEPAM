@@ -18,23 +18,21 @@ public class Cars implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private Integer carId;
-    
     private String registrationNumber;
-    
     private int placesNumber;
     private Boolean isValid;
 
     public Cars() {
     }
 
-    public Cars(Integer carId) {
+    public Cars(Integer carId, String registrationNumber, int placesNumber, Boolean isValid) {
         this.carId = carId;
+        this.registrationNumber = registrationNumber;
+        this.placesNumber = placesNumber;
+        this.isValid = isValid;
     }
 
-    public Cars(Integer carId, int placesNumber) {
-        this.carId = carId;
-        this.placesNumber = placesNumber;
-    }
+
 
     public Integer getCarId() {
         return carId;

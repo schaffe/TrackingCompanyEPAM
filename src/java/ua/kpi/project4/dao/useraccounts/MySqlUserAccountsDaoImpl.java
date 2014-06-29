@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -66,17 +67,37 @@ public class MySqlUserAccountsDaoImpl implements UserAccountsDAO {
         } catch (SQLException ex) {
             Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).log(Level.ERROR, null, ex);
             throw new IllegalArgumentException(ex);
+        } finally {
+            closeConnection();
         }
     }
 
-    @Override
-    public void insert(UserAccounts account) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void update(UserAccounts account) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//
+//        LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
+//        conditions.put(ID, "?");
+//        String[] fields = {};
+//        String query = MySqlUtility.createUpdateStatment(TABLE, conditions, fields);
+//
+//        try (PreparedStatement statment = connection.prepareStatement(query)) {
+//            statment.setInt(1, account.getUserAccountId());
+//            statment.executeUpdate();
+//            Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).info((new Date()).toString() + " " + statment);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).log(Level.ERROR, null, ex);
+//        } finally {
+//            closeConnection();
+//        }
+    }
+
+    private void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).log(Level.ERROR, null, ex);
+        }
     }
 
 }

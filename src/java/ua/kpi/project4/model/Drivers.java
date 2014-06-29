@@ -23,9 +23,12 @@ public class Drivers implements Serializable {
     public Drivers() {
     }
 
-    public Drivers(Integer driverId) {
+    public Drivers(Integer driverId, int userAccountId, int carId) {
         this.driverId = driverId;
+        this.userAccountId = userAccountId;
+        this.carId = carId;
     }
+
 
     public Integer getDriverId() {
         return driverId;

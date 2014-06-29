@@ -49,7 +49,8 @@ public interface Constants {
         AUTH,
         LOGOUT,
         SHOW_ALL_APPLICATIONS,
-        VIEW_APPLICATION
+        VIEW_APPLICATION,
+        CHOOSE_DRIVER
     }
 
     public enum Profiles {
