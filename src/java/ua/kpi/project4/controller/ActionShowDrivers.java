@@ -26,12 +26,12 @@ public class ActionShowDrivers implements Action {
         try {
             DaoFactory daoFactory = DaoFactory.getDaoFactory();
             List<Drivers> drivers = daoFactory.getDriversDao(daoFactory.getConnection()).getAll();
-            
+
             //filter drivers to some application
-            if(request.getParameter(RequestParameters.APPLICATION) != null) {
+            if (request.getParameter(RequestParameters.APPLICATION) != null) {
                 int applicationId = Integer.valueOf(request.getParameter(RequestParameters.APPLICATION));
                 Applications application = daoFactory.getApplicationsDAO(daoFactory.getConnection()).getApplicationsById(applicationId);
-                
+
                 for (Iterator<Drivers> it = drivers.iterator(); it.hasNext();) {
                     Drivers driver = it.next();
                     Cars car = driver.getCar();
@@ -39,8 +39,8 @@ public class ActionShowDrivers implements Action {
                         it.remove();
                     }
                 }
+                request.setAttribute(RequestParameters.APPLICATION, application);
             }
-            
             request.setAttribute(RequestParameters.LIST, drivers);
         } catch (IllegalArgumentException e) {
         }

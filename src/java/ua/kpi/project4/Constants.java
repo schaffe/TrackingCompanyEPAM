@@ -37,6 +37,7 @@ public interface Constants {
         String APPLICATION_ACTION = "aaction";
         String ID = "id";
         String LIST = "list";
+        String DRIVER = "driver";
         
         public enum ApplicationParam {
             CREATE,

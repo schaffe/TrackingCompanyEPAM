@@ -24,6 +24,8 @@
                 <th></th>
             </tr>
 
+            <c:set var='application_attr' value="<%=Constants.RequestParameters.APPLICATION%>" />
+            <c:set var='application' value="${requestScope[application_attr]}" />
             <c:set var='list' value="<%=Constants.RequestParameters.LIST%>" />
             <c:forEach var="driver" items="${requestScope[list]}">
                 <tr>
@@ -31,10 +33,19 @@
                     <td><c:out value="${driver.car.model}"/></td>
                     <td><c:out value="${driver.car.placesNumber}"/></td>
                     <td>Edit</td>
-                    <td>Select</td>
+                    <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SET_DRIVER%>&<%=Constants.RequestParameters.APPLICATION%>=${application.applicationId}&<%=Constants.RequestParameters.DRIVER%>=${driver.driverId}">
+                            <fmt:message key="epam.text.set"/></a></td>
                 </tr>
             </c:forEach>
         </table>
+        <!-- Back button -->
+        <form action="<%=Constants.ACTION%>" method="POST" >
+            <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.VIEW_APPLICATION%>">
+            <input type="hidden" name="<%=Constants.RequestParameters.ID%>" value="${application.applicationId}">
+            <fmt:message key="epam.text.back" var="buttonBack" />
+            <input type="submit" value="${buttonBack}">
+        </form>
+        <!-- /Back button -->
 
     </body>
 </html>

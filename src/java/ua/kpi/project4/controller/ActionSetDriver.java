@@ -24,27 +24,28 @@ public class ActionSetDriver implements Action {
         HttpServletRequest request = view.getRequest();
 
         try {
-            DaoFactory daoFactory = DaoFactory.getDaoFactory();
-            List<Drivers> drivers = daoFactory.getDriversDao(daoFactory.getConnection()).getAll();
-            
-            //filter drivers to some application
-            if(request.getParameter(RequestParameters.APPLICATION) != null) {
+            if (request.getParameter(RequestParameters.APPLICATION) != null && request.getParameter(RequestParameters.DRIVER) != null) {
                 int applicationId = Integer.valueOf(request.getParameter(RequestParameters.APPLICATION));
+                int driverId = Integer.valueOf(request.getParameter(RequestParameters.DRIVER));
+                DaoFactory daoFactory = DaoFactory.getDaoFactory();
+                Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(driverId);
                 Applications application = daoFactory.getApplicationsDAO(daoFactory.getConnection()).getApplicationsById(applicationId);
+                Cars car = driver.getCar();
                 
-                for (Iterator<Drivers> it = drivers.iterator(); it.hasNext();) {
-                    Drivers driver = it.next();
-                    Cars car = driver.getCar();
-                    if (application.getPassengersNum() > driver.getCar().getPlacesNumber()) {
-                        it.remove();
-                    }
+                if (car.getIsValid() && application.getPassengersNum() <= car.getPlacesNumber()) {
+                    application.setDriver(driver);
+                    application.setStatus(ApplicationStatus.TRUCKING.name());
+                    daoFactory.getApplicationsDAO(daoFactory.getConnection()).updateApplications(application);
+                } else {
+                    //TODO error!
                 }
+                
+                request.setAttribute(RequestParameters.APPLICATION, application);
             }
-            
-            request.setAttribute(RequestParameters.LIST, drivers);
+
         } catch (IllegalArgumentException e) {
         }
 
-        return Pages.DRIVERS;
+        return Pages.APPLICATION_DETAILS;
     }
 }

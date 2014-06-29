@@ -53,11 +53,14 @@
             </form>
         </c:if>
 
+        <!-- Back button -->
         <form action="<%=Constants.ACTION%>" method="POST" >
             <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.SHOW_ALL_APPLICATIONS%>">
             <fmt:message key="epam.text.back" var="buttonBack" />
             <input type="submit" value="${buttonBack}">
         </form>
+        <!-- /Back button -->
+
 
     </body>
 </html>
