@@ -24,6 +24,10 @@ public class UserAccounts implements Serializable {
     public UserAccounts() {
     }
 
+    public UserAccounts(Integer userAccountId) {
+        this.userAccountId = userAccountId;
+    }
+
     public UserAccounts(Integer userAccountId, String fullName, String login, String password, String profile) {
         this.userAccountId = userAccountId;
         this.fullName = fullName;

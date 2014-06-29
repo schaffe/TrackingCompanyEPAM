@@ -72,7 +72,6 @@ public class MySqlUserAccountsDaoImpl implements UserAccountsDAO {
         }
     }
 
-
     @Override
     public void update(UserAccounts account) {
 //
@@ -97,6 +96,42 @@ public class MySqlUserAccountsDaoImpl implements UserAccountsDAO {
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).log(Level.ERROR, null, ex);
+        }
+    }
+
+    @Override
+    public UserAccounts getById(int id) {
+        String[] tables = new String[]{TABLE};
+        LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
+        conditions.put(ID, "?");
+        String[] fields = {ID, LOGIN, PASSWORD, FULLNAME, PROFILE_ID};
+        String sql = MySqlUtility.createSelectStatment(tables, conditions, fields);
+
+        try (PreparedStatement statement = connection.prepareStatement(sql);) {
+            statement.setInt(1, id);
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    UserAccounts userInfo = new UserAccounts(
+                            result.getInt(ID),
+                            result.getString(FULLNAME),
+                            result.getString(LOGIN),
+                            result.getString(PASSWORD),
+                            result.getString(PROFILE_ID)
+                    );
+                    Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
+
+                    return userInfo;
+                } else {
+                    String msg = "No such employee.";
+                    Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).log(Level.ERROR, msg);
+                    throw new IllegalArgumentException(msg);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).log(Level.ERROR, null, ex);
+            throw new IllegalArgumentException(ex);
+        } finally {
+            closeConnection();
         }
     }
 

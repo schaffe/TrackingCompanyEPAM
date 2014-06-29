@@ -3,32 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ua.kpi.project4.model;
 
 import java.io.Serializable;
 import java.util.List;
-
 
 /**
  *
  * @author User
  */
 public class Drivers implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private Integer driverId;
-    private int userAccountId;
-    private int carId;
+    private UserAccounts userAccount;
+    private Cars car;
 
     public Drivers() {
     }
 
-    public Drivers(Integer driverId, int userAccountId, int carId) {
+    public Drivers(Integer driverId) {
         this.driverId = driverId;
-        this.userAccountId = userAccountId;
-        this.carId = carId;
     }
-
 
     public Integer getDriverId() {
         return driverId;
@@ -38,22 +34,27 @@ public class Drivers implements Serializable {
         this.driverId = driverId;
     }
 
-    public int getUserAccountId() {
-        return userAccountId;
+    public Drivers(Integer driverId, UserAccounts userAccount, Cars car) {
+        this.driverId = driverId;
+        this.userAccount = userAccount;
+        this.car = car;
     }
 
-    public void setUserAccountId(int userAccountId) {
-        this.userAccountId = userAccountId;
+    public UserAccounts getUserAccount() {
+        return userAccount;
     }
 
-    public int getCarId() {
-        return carId;
+    public void setUserAccount(UserAccounts userAccount) {
+        this.userAccount = userAccount;
     }
 
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public Cars getCar() {
+        return car;
     }
 
+    public void setCar(Cars car) {
+        this.car = car;
+    }
 
     @Override
     public int hashCode() {
@@ -79,5 +80,5 @@ public class Drivers implements Serializable {
     public String toString() {
         return "ua.kpi.project4.model.Drivers[ driverId=" + driverId + " ]";
     }
-    
+
 }

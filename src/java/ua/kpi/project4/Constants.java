@@ -17,6 +17,7 @@ public interface Constants {
         String WELCOME_PAGE = "./welcomePage.jsp";
         String APPLICATIONS = "./applications.jsp";
         String APPLICATION_DETAILS = "./applicationDetails.jsp";
+        String DRIVERS = "./drivers.jsp";
     }
 
     public interface SessionParameters {
@@ -35,6 +36,7 @@ public interface Constants {
         String APPLICATION = "application";
         String APPLICATION_ACTION = "aaction";
         String ID = "id";
+        String LIST = "list";
         
         public enum ApplicationParam {
             CREATE,
@@ -50,7 +52,8 @@ public interface Constants {
         LOGOUT,
         SHOW_ALL_APPLICATIONS,
         VIEW_APPLICATION,
-        CHOOSE_DRIVER
+        SHOW_DRIVERS,
+        SET_DRIVER
     }
 
     public enum Profiles {

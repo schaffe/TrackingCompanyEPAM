@@ -15,12 +15,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.dao.MySqlUtility;
 import ua.kpi.project4.dao.applications.*;
+import static ua.kpi.project4.dao.applications.MySqlApplicationsDaoImpl.DRIVER_ID;
 import ua.kpi.project4.dao.cars.*;
 import ua.kpi.project4.model.Applications;
 import ua.kpi.project4.model.Cars;
 import ua.kpi.project4.model.Drivers;
+import ua.kpi.project4.model.UserAccounts;
 
 /**
  *
@@ -31,7 +34,7 @@ public class MySqlDriversDaoImpl implements DriversDao {
     public static final String TABLE = "drivers";
     public static final String ID = TABLE + ".DriverId";
     public static final String USER_ID = TABLE + ".UserAccountId";
-    public static final String CAR_ID = TABLE + ".Car_ID";
+    public static final String CAR_ID = TABLE + ".CarId";
 
     private final Connection connection;
 
@@ -51,10 +54,14 @@ public class MySqlDriversDaoImpl implements DriversDao {
                 ResultSet result = statement.executeQuery()) {
             List<Drivers> driverList = new ArrayList<>();
             while (result.next()) {
+                DaoFactory daoFactory = DaoFactory.getDaoFactory();
+                Cars car = daoFactory.getCarsDao(daoFactory.getConnection()).getCarById(result.getInt(CAR_ID));
+                UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(USER_ID));
+
                 Drivers application = new Drivers(
                         result.getInt(ID),
-                        result.getInt(USER_ID),
-                        result.getInt(CAR_ID)
+                        account,
+                        car
                 );
                 Logger.getLogger(MySqlDriversDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
                 driverList.add(application);
@@ -81,10 +88,14 @@ public class MySqlDriversDaoImpl implements DriversDao {
             statement.setInt(1, id);
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
+                    DaoFactory daoFactory = DaoFactory.getDaoFactory();
+                    Cars car = daoFactory.getCarsDao(daoFactory.getConnection()).getCarById(result.getInt(CAR_ID));
+                    UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(USER_ID));
+
                     Drivers application = new Drivers(
                             result.getInt(ID),
-                            result.getInt(USER_ID),
-                            result.getInt(CAR_ID)
+                            account,
+                            car
                     );
                     Logger.getLogger(MySqlDriversDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
 
@@ -112,7 +123,7 @@ public class MySqlDriversDaoImpl implements DriversDao {
         String query = MySqlUtility.createUpdateStatment(TABLE, conditions, fields);
 
         try (PreparedStatement statment = connection.prepareStatement(query)) {
-            statment.setInt(1, driver.getCarId());
+            statment.setInt(1, driver.getCar().getCarId());
             statment.setInt(2, driver.getDriverId());
             statment.executeUpdate();
             Logger.getLogger(MySqlDriversDaoImpl.class.getName()).info((new Date()).toString() + " " + statment);

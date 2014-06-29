@@ -14,5 +14,6 @@ import ua.kpi.project4.model.UserAccounts;
  */
 public interface UserAccountsDAO {
     UserAccounts getByLogin(String login);
+    UserAccounts getById(int id);
     void update(UserAccounts account);
 }

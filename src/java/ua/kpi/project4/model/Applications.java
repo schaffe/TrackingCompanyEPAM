@@ -19,13 +19,13 @@ public class Applications implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer applicationId;
-    private int creatorUserAccountID;
+    private UserAccounts creatorUserAccount;
     private String from;
     private String destination;
     private Date arrivalTime;
     private int passengersNum;
     private Constants.ApplicationStatus status;
-    private int driverId;
+    private Drivers driver;
     private Date dateCreate;
 
     public Applications() {
@@ -35,17 +35,17 @@ public class Applications implements Serializable {
         this.applicationId = applicationId;
     }
 
-    public Applications(Integer applicationId, int creatorUserAccountID, 
+    public Applications(Integer applicationId, UserAccounts creatorUserAccount, 
             String from, String destination, Date arrivalTime, int passengersNum, 
-            String status, int driverId, Date dateCreate) {
+            String status, Drivers driver, Date dateCreate) {
         this.applicationId = applicationId;
-        this.creatorUserAccountID = creatorUserAccountID;
+        this.creatorUserAccount = creatorUserAccount;
         this.from = from;
         this.destination = destination;
         this.arrivalTime = arrivalTime;
         this.passengersNum = passengersNum;
         this.status = Constants.ApplicationStatus.valueOf(status);
-        this.driverId = driverId;
+        this.driver = driver;
         this.dateCreate = dateCreate;
     }
 
@@ -89,13 +89,22 @@ public class Applications implements Serializable {
         this.passengersNum = passengersNum;
     }
 
-    public int getCreatorUserAccountID() {
-        return creatorUserAccountID;
+    public UserAccounts getCreatorUserAccount() {
+        return creatorUserAccount;
     }
 
-    public void setCreatorUserAccountID(int creatorUserAccountID) {
-        this.creatorUserAccountID = creatorUserAccountID;
+    public void setCreatorUserAccount(UserAccounts creatorUserAccount) {
+        this.creatorUserAccount = creatorUserAccount;
     }
+
+    public Drivers getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Drivers driver) {
+        this.driver = driver;
+    }
+
 
     public String getStatus() {
         return status.name();
@@ -105,13 +114,6 @@ public class Applications implements Serializable {
         this.status = Constants.ApplicationStatus.valueOf(status);
     }
 
-    public int getDriverId() {
-        return driverId;
-    }
-
-    public void setDriverId(int driverId) {
-        this.driverId = driverId;
-    }
 
     public Date getDateCreate() {
         return dateCreate;

@@ -10,6 +10,10 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import ua.kpi.project4.dao.applications.ApplicationsDAO;
 import ua.kpi.project4.dao.applications.MySqlApplicationsDaoImpl;
+import ua.kpi.project4.dao.cars.CarsDAO;
+import ua.kpi.project4.dao.cars.MySqlCarsDaoImpl;
+import ua.kpi.project4.dao.drivers.DriversDao;
+import ua.kpi.project4.dao.drivers.MySqlDriversDaoImpl;
 import ua.kpi.project4.dao.useraccounts.MySqlUserAccountsDaoImpl;
 import ua.kpi.project4.dao.useraccounts.UserAccountsDAO;
 
@@ -62,6 +66,16 @@ public class MySqlDaoFactory extends DaoFactory {
     @Override
     public ApplicationsDAO getApplicationsDAO(Connection c) {
         return new MySqlApplicationsDaoImpl(c);
+    }
+
+    @Override
+    public CarsDAO getCarsDao(Connection c) {
+        return new MySqlCarsDaoImpl(c);
+    }
+
+    @Override
+    public DriversDao getDriversDao(Connection c) {
+        return new MySqlDriversDaoImpl(c);
     }
 
 }

@@ -25,6 +25,11 @@ public class Cars implements Serializable {
     public Cars() {
     }
 
+    public Cars(Integer carId) {
+        this.carId = carId;
+    }
+    
+
     public Cars(Integer carId, String registrationNumber, int placesNumber, Boolean isValid) {
         this.carId = carId;
         this.registrationNumber = registrationNumber;
