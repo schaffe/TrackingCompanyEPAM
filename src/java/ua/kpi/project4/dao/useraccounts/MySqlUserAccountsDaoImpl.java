@@ -54,7 +54,7 @@ public class MySqlUserAccountsDaoImpl implements UserAccountsDAO {
                             result.getString(PASSWORD),
                             result.getString(PROFILE_ID)
                     );
-                    Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + sql);
+                    Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
 
                     return userInfo;
                 } else {

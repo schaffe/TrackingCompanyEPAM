@@ -16,6 +16,7 @@ public interface Constants {
         String INDEX = "./index.jsp";
         String WELCOME_PAGE = "./welcomePage.jsp";
         String APPLICATIONS = "./applications.jsp";
+        String APPLICATION_DETAILS = "./applicationDetails.jsp";
     }
 
     public interface SessionParameters {
@@ -31,6 +32,15 @@ public interface Constants {
         String FULLNAME = "fullname";
         String COMMAND_STR = "action";
         String APPLICATIONS = "applications";
+        String APPLICATION = "application";
+        String APPLICATION_ACTION = "aaction";
+        String ID = "id";
+        
+        public enum ApplicationParam {
+            CREATE,
+            EDIT,
+            VIEW
+        }
     }
 
     public enum Commands {
@@ -38,7 +48,8 @@ public interface Constants {
         NOACTION,
         AUTH,
         LOGOUT,
-        SHOW_ALL_APPLICATIONS;
+        SHOW_ALL_APPLICATIONS,
+        VIEW_APPLICATION
     }
 
     public enum Profiles {
@@ -50,7 +61,7 @@ public interface Constants {
 
     public enum ApplicationStatus {
 
-        NEW,
+        PENDING,
         PROCESSED, 
         TRUCKING, 
         POSTPONED, 

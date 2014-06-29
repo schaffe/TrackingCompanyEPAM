@@ -29,8 +29,8 @@ public class ActionAuth implements Action {
             if (password.equals(account.getPassword())) {
                 int userId = account.getUserAccountId();
                 String name = account.getFullName();
-                request.setAttribute(RequestParameters.FULLNAME, name);
                 HttpSession session = request.getSession(true);
+                session.setAttribute(RequestParameters.FULLNAME, name);
                 session.setAttribute(SessionParameters.USER_ID, userId);
                 session.setAttribute(SessionParameters.PROFILE_ID, account.getProfile());
                 return Pages.WELCOME_PAGE;

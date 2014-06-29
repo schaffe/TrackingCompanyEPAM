@@ -11,13 +11,8 @@
         <title><fmt:message key="epam.a.title"/></title>
     </head>
     <body>
-        <!-- Logout button -->
-        <form action="<%=Constants.ACTION%>" method="POST" >
-            <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.LOGOUT%>">
-            <fmt:message key="epam.text.logout" var="buttonLogout" />
-            <input type="submit" value="${buttonLogout}">
-        </form>
-        <!------------------->
+        <%@include file="/WEB-INF/jspf/headerButtons.jspf" %>
+
 
         <table border="1">
             <caption><fmt:message key="epam.a.title"/></caption>
@@ -32,7 +27,8 @@
             <c:set var='application_list' value="<%=Constants.RequestParameters.APPLICATIONS%>" />
             <c:forEach var="application" items="${requestScope[application_list]}">
                 <tr>
-                    <td><a href=""><c:out value="${application.applicationId}"/></a></td>
+                    <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.VIEW_APPLICATION%>&<%=Constants.RequestParameters.ID%>=${application.applicationId}">
+                            <c:out value="${application.applicationId}"/></a></td>
                     <td><c:out value="${application.from}"/></td>
                     <td><c:out value="${application.destination}"/></td>
                     <td><c:out value="${application.arrivalTime}"/></td>

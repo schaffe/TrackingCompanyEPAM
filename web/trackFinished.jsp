@@ -16,6 +16,8 @@
         <title><fmt:message key="epam.tf.title" /></title>
     </head>
     <body>
+                <%@include file="/WEB-INF/jspf/headerButtons.jspf" %>
+
         <form action="command">
             <input type="hidden" name="action" value="track_finished">
             <p>

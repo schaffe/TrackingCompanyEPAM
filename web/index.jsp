@@ -6,6 +6,12 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="bundle" />
 
+<c:set var='user_id' value="<%=Constants.SessionParameters.USER_ID%>" />
+<c:if test="${not empty sessionScope[user_id]}">
+    <c:redirect url="<%=Constants.Pages.WELCOME_PAGE%>" />
+</c:if>
+
+
 <!DOCTYPE html>
 <html lang="${language}">
     <head>

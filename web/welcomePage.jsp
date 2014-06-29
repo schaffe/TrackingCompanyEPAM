@@ -14,17 +14,14 @@
         <title><fmt:message key="epam.welcome.title"/></title>
     </head>
     <body>
+        <%@include file="/WEB-INF/jspf/headerButtons.jspf" %>
+
         <c:set var='fullname_param' value="<%=Constants.RequestParameters.FULLNAME%>" />
-        <fmt:message key="epam.welcome.welcome"/> <c:out value="${requestScope[fullname_param]}"/><br>
+        <c:set var='profile_param' value="<%=Constants.SessionParameters.PROFILE_ID%>" />
+        <fmt:message key="epam.welcome.welcome"/> <c:out value="${sessionScope[fullname_param]}"/><br>
+        <fmt:message key="epam.welcome.logged_as"/> <c:out value="${sessionScope[profile_param]}"/><br>
         <a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_ALL_APPLICATIONS%>">Show all applications</a>
 
-        <!-- Logout button -->
-        <form action="<%=Constants.ACTION%>" method="POST" >
-            <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.LOGOUT%>">
-            <fmt:message key="epam.text.logout" var="buttonLogout" />
-            <input type="submit" value="${buttonLogout}">
-        </form>
-        <!------------------->
     </body>
 
 
