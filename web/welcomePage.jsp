@@ -14,7 +14,9 @@
         <title><fmt:message key="epam.welcome.title"/></title>
     </head>
     <body>
-        <fmt:message key="epam.welcome.welcome"/> <c:out value="${requestScope.fullname}"/>
+        <c:set var='fullname_param' value="<%=Constants.RequestParameters.FULLNAME%>" />
+        <fmt:message key="epam.welcome.welcome"/> <c:out value="${requestScope[fullname_param]}"/><br>
+        <a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_ALL_APPLICATIONS%>">Show all applications</a>
 
         <!-- Logout button -->
         <form action="<%=Constants.ACTION%>" method="POST" >

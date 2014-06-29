@@ -61,7 +61,7 @@ public class MySqlDaoFactory extends DaoFactory {
 
     @Override
     public ApplicationsDAO getApplicationsDAO(Connection c) {
-        return new MySqlApplicationsDaoImpl();
+        return new MySqlApplicationsDaoImpl(c);
     }
 
 

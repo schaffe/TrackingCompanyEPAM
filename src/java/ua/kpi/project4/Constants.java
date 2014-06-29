@@ -12,12 +12,15 @@ package ua.kpi.project4;
 public interface Constants {
 
     public interface Pages {
+
         String INDEX = "./index.jsp";
         String WELCOME_PAGE = "./welcomePage.jsp";
+        String APPLICATIONS = "./applications.jsp";
     }
-    
+
     public interface SessionParameters {
 
+        String PROFILE_ID = "profile_id";
         String USER_ID = "user_id";
     }
 
@@ -27,13 +30,33 @@ public interface Constants {
         String PASSWORD = "password";
         String FULLNAME = "fullname";
         String COMMAND_STR = "action";
+        String APPLICATIONS = "applications";
     }
 
     public enum Commands {
+
         NOACTION,
         AUTH,
-        LOGOUT,;
+        LOGOUT,
+        SHOW_ALL_APPLICATIONS;
     }
-    
+
+    public enum Profiles {
+
+        DISPATCHER,
+        DRIVER,
+        CUSTOMER
+    }
+
+    public enum ApplicationStatus {
+
+        NEW,
+        PROCESSED, 
+        TRUCKING, 
+        POSTPONED, 
+        CANCELLED, 
+        DONE
+    }
+
     String ACTION = "command";
 }

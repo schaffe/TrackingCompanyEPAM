@@ -23,6 +23,7 @@ public class ActionFactory implements Constants {
         actionMap.put(Commands.AUTH, new ActionAuth());
         actionMap.put(Commands.LOGOUT, new ActionLogout());
         actionMap.put(Commands.NOACTION, new ActionNoAction());
+        actionMap.put(Commands.SHOW_ALL_APPLICATIONS, new ActionShowAllApllications());
     }
 
     public Action getAction(HttpServletRequest request) {

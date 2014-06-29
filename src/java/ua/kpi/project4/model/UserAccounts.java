@@ -6,7 +6,7 @@
 package ua.kpi.project4.model;
 
 import java.io.Serializable;
-import java.util.List;
+import ua.kpi.project4.Constants;
 
 /**
  *
@@ -19,17 +19,17 @@ public class UserAccounts implements Serializable {
     private String fullName;
     private String login;
     private String password;
-    private int profileId;
+    private Constants.Profiles profile;
 
     public UserAccounts() {
     }
 
-    public UserAccounts(Integer userAccountId, String fullName, String login, String password, int profileId) {
+    public UserAccounts(Integer userAccountId, String fullName, String login, String password, String profile) {
         this.userAccountId = userAccountId;
         this.fullName = fullName;
         this.login = login;
         this.password = password;
-        this.profileId = profileId;
+        this.profile = Constants.Profiles.valueOf(profile);
     }
 
 
@@ -66,12 +66,12 @@ public class UserAccounts implements Serializable {
         this.password = password;
     }
 
-    public int getProfileId() {
-        return profileId;
+    public String getProfile() {
+        return profile.name();
     }
 
-    public void setProfileId(int profileId) {
-        this.profileId = profileId;
+    public void setProfileId(Constants.Profiles profile) {
+        this.profile = profile;
     }
 
    

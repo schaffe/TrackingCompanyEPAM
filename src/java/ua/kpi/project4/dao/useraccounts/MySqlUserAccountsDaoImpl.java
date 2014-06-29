@@ -26,7 +26,7 @@ public class MySqlUserAccountsDaoImpl implements UserAccountsDAO {
     public static final String LOGIN = TABLE + ".Login";
     public static final String PASSWORD = TABLE + ".Password";
     public static final String FULLNAME = TABLE + ".Fullname";
-    public static final String PROFILE_ID = TABLE + ".ProfileId";
+    public static final String PROFILE_ID = TABLE + ".Profile";
 
     private final Connection connection;
 
@@ -52,7 +52,7 @@ public class MySqlUserAccountsDaoImpl implements UserAccountsDAO {
                             result.getString(FULLNAME),
                             result.getString(LOGIN),
                             result.getString(PASSWORD),
-                            result.getInt(PROFILE_ID)
+                            result.getString(PROFILE_ID)
                     );
                     Logger.getLogger(MySqlUserAccountsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + sql);
 

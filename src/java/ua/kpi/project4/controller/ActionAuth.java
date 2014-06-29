@@ -31,7 +31,8 @@ public class ActionAuth implements Action {
                 String name = account.getFullName();
                 request.setAttribute(RequestParameters.FULLNAME, name);
                 HttpSession session = request.getSession(true);
-                session.setAttribute(SessionParameters.USER_ID, new Integer(userId));
+                session.setAttribute(SessionParameters.USER_ID, userId);
+                session.setAttribute(SessionParameters.PROFILE_ID, account.getProfile());
                 return Pages.WELCOME_PAGE;
             }
         } catch (IllegalArgumentException e) {

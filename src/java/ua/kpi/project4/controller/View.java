@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class View {
 
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+    private final HttpServletRequest request;
+    private final HttpServletResponse response;
 
     public View(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;

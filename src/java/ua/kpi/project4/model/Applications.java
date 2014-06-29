@@ -3,32 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ua.kpi.project4.model;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
+import ua.kpi.project4.Constants;
 
 /**
  *
  * @author User
  */
-
 public class Applications implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    private Integer applicationId;
-        private int creatorUserAccountID;
 
+    private static final long serialVersionUID = 1L;
+
+    private Integer applicationId;
+    private int creatorUserAccountID;
     private String from;
-    
     private String destination;
-   
     private Date arrivalTime;
-    
-    private int passengersNum;    
+    private int passengersNum;
+    private Constants.ApplicationStatus status;
 
     public Applications() {
     }
@@ -37,12 +33,16 @@ public class Applications implements Serializable {
         this.applicationId = applicationId;
     }
 
-    public Applications(Integer applicationId, String from, String destination, Date arrivalTime, int passengersNum) {
+    public Applications(Integer applicationId, int creatorUserAccountID, 
+            String from, String destination, Date arrivalTime, int passengersNum, 
+            String status) {
         this.applicationId = applicationId;
+        this.creatorUserAccountID = creatorUserAccountID;
         this.from = from;
         this.destination = destination;
         this.arrivalTime = arrivalTime;
         this.passengersNum = passengersNum;
+        this.status = Constants.ApplicationStatus.valueOf(status);
     }
 
     public Integer getApplicationId() {
@@ -85,7 +85,6 @@ public class Applications implements Serializable {
         this.passengersNum = passengersNum;
     }
 
-
     public int getCreatorUserAccountID() {
         return creatorUserAccountID;
     }
@@ -94,6 +93,13 @@ public class Applications implements Serializable {
         this.creatorUserAccountID = creatorUserAccountID;
     }
 
+    public String getStatus() {
+        return status.name();
+    }
+
+    public void setStatus(String status) {
+        this.status = Constants.ApplicationStatus.valueOf(status);
+    }
 
     @Override
     public int hashCode() {
@@ -109,7 +115,8 @@ public class Applications implements Serializable {
             return false;
         }
         Applications other = (Applications) object;
-        if ((this.applicationId == null && other.applicationId != null) || (this.applicationId != null && !this.applicationId.equals(other.applicationId))) {
+        if ((this.applicationId == null && other.applicationId != null) || 
+                (this.applicationId != null && !this.applicationId.equals(other.applicationId))) {
             return false;
         }
         return true;
@@ -119,5 +126,5 @@ public class Applications implements Serializable {
     public String toString() {
         return "ua.kpi.project4.model.Applications[ applicationId=" + applicationId + " ]";
     }
-    
+
 }
