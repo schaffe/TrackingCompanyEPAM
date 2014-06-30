@@ -31,15 +31,15 @@ public class ActionShowCars implements Action {
                 Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(driverId);
                 List<Cars> cars = daoFactory.getCarsDao(daoFactory.getConnection()).getAll();
 
-                for (Iterator<Cars> it = cars.iterator(); it.hasNext();) {
-                    Cars car = it.next();
-                    if (!car.getIsValid()) {
-                        it.remove();
-                    }
-                }
-                
                 if (request.getParameter(RequestParameters.APPLICATION) != null) {
                     request.setAttribute(RequestParameters.APPLICATION, Integer.valueOf(request.getParameter(RequestParameters.APPLICATION)));
+                    
+                    for (Iterator<Cars> it = cars.iterator(); it.hasNext();) {
+                        Cars car = it.next();
+                        if (!car.getIsValid()) {
+                            it.remove();
+                        }
+                    }
                 }
                 request.setAttribute(RequestParameters.DRIVER, driver);
                 request.setAttribute(RequestParameters.LIST, cars);

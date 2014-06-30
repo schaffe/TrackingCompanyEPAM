@@ -5,8 +5,6 @@
  */
 package ua.kpi.project4.controller;
 
-import java.util.Iterator;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.Applications;
@@ -17,7 +15,7 @@ import ua.kpi.project4.model.Drivers;
  *
  * @author User
  */
-public class ActionSetDriver implements Action {
+public class ActionStartTrucking implements Action {
 
     @Override
     public String execute(View view) {
@@ -28,24 +26,18 @@ public class ActionSetDriver implements Action {
                 int applicationId = Integer.valueOf(request.getParameter(RequestParameters.APPLICATION));
                 int driverId = Integer.valueOf(request.getParameter(RequestParameters.DRIVER));
                 DaoFactory daoFactory = DaoFactory.getDaoFactory();
-                Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(driverId);
+//                Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(driverId);
                 Applications application = daoFactory.getApplicationsDAO(daoFactory.getConnection()).getApplicationsById(applicationId);
-                Cars car = driver.getCar();
-                
-                if (car.getIsValid() && application.getPassengersNum() <= car.getPlacesNumber()) {
-                    application.setDriver(driver);
-                    application.setStatus(ApplicationStatus.PROCESSED.name());
-                    daoFactory.getApplicationsDAO(daoFactory.getConnection()).updateApplications(application);
-                } else {
-                    //TODO error!
-                }
-                
+
+                application.setStatus(ApplicationStatus.TRUCKING.name());
+                daoFactory.getApplicationsDAO(daoFactory.getConnection()).updateApplications(application);
+
                 request.setAttribute(RequestParameters.APPLICATION, application);
             }
 
         } catch (IllegalArgumentException e) {
         }
 
-        return Pages.APPLICATION_DETAILS;
+        return ActionFactory.getInstance().getAction(Commands.SHOW_ALL_APPLICATIONS).execute(view);
     }
 }

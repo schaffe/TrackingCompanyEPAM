@@ -40,6 +40,6 @@ public class ActionSetCar implements Action {
         } catch (IllegalArgumentException e) {
         }
 
-        return (new ActionShowDrivers()).execute(view);
+        return ActionFactory.getInstance().getAction(Commands.SHOW_DRIVERS).execute(view);
     }
 }

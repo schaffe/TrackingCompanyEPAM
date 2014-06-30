@@ -54,7 +54,9 @@ public interface Constants {
         SHOW_DRIVERS,
         SET_DRIVER,
         SHOW_CARS,
-        SET_CAR
+        SET_CAR,
+        START_TRUCKING
+        
     }
 
     public enum Profiles {

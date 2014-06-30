@@ -28,8 +28,32 @@
             <c:set var='list' value="<%=Constants.RequestParameters.LIST%>" />
             <fmt:message key="epam.text.true" var="yes"/>    
             <fmt:message key="epam.text.false" var="no"/>    
-            
-            <c:forEach var="car" items="${requestScope[list]}">
+
+            <c:choose>
+                <c:when test="${empty application}">
+                    <c:forEach var="car" items="${requestScope[list]}">
+                        <tr>
+                            <td><c:out value="${car.model}"/></td>
+                            <td><c:out value="${car.placesNumber}"/></td>
+                            <td><c:out value="${car.isValid == 'true' ? yes : no}"/></td>
+                            <c:if test="${car.isValid == 'true'}">
+                            <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SET_CAR%>&<%=Constants.RequestParameters.DRIVER%>=${driver.driverId}&<%=Constants.RequestParameters.CAR%>=${car.carId}">
+                                    <fmt:message key="epam.text.set"/></a></td>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
+                </table>
+                <!-- Back button -->
+                <form action="<%=Constants.ACTION%>" method="POST" >
+                    <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.SHOW_DRIVERS%>">
+                    <input type="hidden" name="<%=Constants.RequestParameters.DRIVER%>" value="${driver.driverId}">
+                    <fmt:message key="epam.text.back" var="buttonBack" />
+                    <input type="submit" value="${buttonBack}">
+                </form>
+                <!-- /Back button -->
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="car" items="${requestScope[list]}">
                 <tr>
                     <td><c:out value="${car.model}"/></td>
                     <td><c:out value="${car.placesNumber}"/></td>
@@ -48,6 +72,7 @@
             <input type="submit" value="${buttonBack}">
         </form>
         <!-- /Back button -->
-
-    </body>
+    </c:otherwise>
+</c:choose>
+</body>
 </html>

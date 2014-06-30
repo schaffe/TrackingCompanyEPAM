@@ -25,7 +25,7 @@ public class CommandServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        factory = new ActionFactory();
+        factory = ActionFactory.getInstance();
     }
 
     /**

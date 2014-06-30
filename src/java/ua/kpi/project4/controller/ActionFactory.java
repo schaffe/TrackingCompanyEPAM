@@ -18,7 +18,7 @@ public class ActionFactory implements Constants {
 
     private final Map<Commands, Action> actionMap;
 
-    public ActionFactory() {
+    private ActionFactory() {
         actionMap = new EnumMap<>(Commands.class);
         actionMap.put(Commands.AUTH, new ActionAuth());
         actionMap.put(Commands.LOGOUT, new ActionLogout());
@@ -29,6 +29,7 @@ public class ActionFactory implements Constants {
         actionMap.put(Commands.SET_DRIVER, new ActionSetDriver());
         actionMap.put(Commands.SET_CAR, new ActionSetCar());
         actionMap.put(Commands.SHOW_CARS, new ActionShowCars());
+        actionMap.put(Commands.START_TRUCKING, new ActionStartTrucking());
 
     }
 
@@ -45,5 +46,18 @@ public class ActionFactory implements Constants {
         } else {
             return actionMap.get(Commands.NOACTION);
         }
+    }
+    
+    public Action getAction(Commands action) {
+            return actionMap.get(action);
+    }
+
+    public static ActionFactory getInstance() {
+        return SingletonHolder.HOLDER_INSTANCE;
+    }
+
+    public static class SingletonHolder {
+
+        public static final ActionFactory HOLDER_INSTANCE = new ActionFactory();
     }
 }
