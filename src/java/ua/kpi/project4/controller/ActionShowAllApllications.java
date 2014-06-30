@@ -5,8 +5,9 @@
  */
 package ua.kpi.project4.controller;
 
-import java.util.List;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import ua.kpi.project4.Constants;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.Applications;
 
@@ -23,6 +24,36 @@ public class ActionShowAllApllications implements Action {
         try {
             DaoFactory daoFactory = DaoFactory.getDaoFactory();
             List<Applications> applications = daoFactory.getApplicationsDAO(daoFactory.getConnection()).getAllApplications();
+
+            String profile = request.getSession().getAttribute(SessionParameters.PROFILE_ID).toString();
+            Constants.Profiles profileEnum = Constants.Profiles.valueOf(profile);
+            int userId = Integer.parseInt(request.getSession().getAttribute(SessionParameters.USER_ID).toString());
+
+            switch (profileEnum) {
+                case DRIVER:
+                    for (Iterator<Applications> it = applications.iterator(); it.hasNext();) {
+                        Applications application = it.next();
+                        if (application.getDriver() == null) {
+                            it.remove();
+                            continue;
+                        }
+                        if (application.getDriver().getUserAccount().getUserAccountId() != userId) {
+                            it.remove();
+                            continue;
+                        }
+                    }
+                    break;
+
+                case CUSTOMER:
+                    for (Iterator<Applications> it = applications.iterator(); it.hasNext();) {
+                        Applications application = it.next();
+                        if (application.getCreatorUserAccount().getUserAccountId() != userId) {
+                            it.remove();
+                        }
+                    }
+                    break;
+            }
+
             request.setAttribute(RequestParameters.APPLICATIONS, applications);
         } catch (IllegalArgumentException e) {
         }

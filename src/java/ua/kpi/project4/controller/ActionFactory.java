@@ -30,6 +30,7 @@ public class ActionFactory implements Constants {
         actionMap.put(Commands.SET_CAR, new ActionSetCar());
         actionMap.put(Commands.SHOW_CARS, new ActionShowCars());
         actionMap.put(Commands.START_TRUCKING, new ActionStartTrucking());
+        actionMap.put(Commands.TRUCK_FINISHED, new ActionTruckFinished());
 
     }
 

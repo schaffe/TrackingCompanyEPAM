@@ -22,17 +22,21 @@ public class ActionTruckFinished implements Action {
         HttpServletRequest request = view.getRequest();
 
         try {
-            if (request.getParameter(RequestParameters.APPLICATION) != null && request.getParameter(RequestParameters.DRIVER) != null) {
+            if (request.getParameter(RequestParameters.APPLICATION) != null && request.getParameter(RequestParameters.CAR) != null) {
                 int applicationId = Integer.valueOf(request.getParameter(RequestParameters.APPLICATION));
-                int driverId = Integer.valueOf(request.getParameter(RequestParameters.DRIVER));
+                boolean carState = Boolean.parseBoolean(request.getParameter(RequestParameters.CAR));
+                Integer driverId = (Integer) request.getSession().getAttribute(SessionParameters.DRIVER_ID);
                 DaoFactory daoFactory = DaoFactory.getDaoFactory();
 //                Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(driverId);
                 Applications application = daoFactory.getApplicationsDAO(daoFactory.getConnection()).getApplicationsById(applicationId);
+                Cars car = application.getDriver().getCar();
 
-                application.setStatus(ApplicationStatus.TRUCKING.name());
-                daoFactory.getApplicationsDAO(daoFactory.getConnection()).updateApplications(application);
-
-                request.setAttribute(RequestParameters.APPLICATION, application);
+                if (application.getDriver().getDriverId().equals(driverId)) {
+                    application.setStatus(ApplicationStatus.DONE.name());
+                    daoFactory.getApplicationsDAO(daoFactory.getConnection()).updateApplications(application);
+                    car.setIsValid(carState);
+                    daoFactory.getCarsDao(daoFactory.getConnection()).update(car);
+                }
             }
 
         } catch (IllegalArgumentException e) {

@@ -119,6 +119,48 @@ public class MySqlDriversDaoImpl implements DriversDao {
             closeConnection();
         }
     }
+    
+    @Override
+    public Drivers getByUserAccount(int id) {
+
+        String[] tables = new String[]{TABLE};
+        LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
+        conditions.put(USER_ID, "?");
+        String[] fields = {ID, USER_ID, CAR_ID};
+        String sql = MySqlUtility.createSelectStatment(tables, conditions, fields);
+
+        try (PreparedStatement statement = connection.prepareStatement(sql);) {
+            statement.setInt(1, id);
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    DaoFactory daoFactory = DaoFactory.getDaoFactory();
+                    Cars car = null;
+                    if (result.getInt(CAR_ID) != 0) {
+                        car = daoFactory.getCarsDao(daoFactory.getConnection()).getById(result.getInt(CAR_ID));
+                    }
+                    UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(USER_ID));
+
+                    Drivers application = new Drivers(
+                            result.getInt(ID),
+                            account,
+                            car
+                    );
+                    Logger.getLogger(MySqlDriversDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
+
+                    return application;
+                } else {
+                    String msg = "No such employee.";
+                    Logger.getLogger(MySqlDriversDaoImpl.class.getName()).log(Level.ERROR, msg);
+                    throw new IllegalArgumentException(msg);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MySqlDriversDaoImpl.class.getName()).log(Level.ERROR, null, ex);
+            throw new IllegalArgumentException(ex);
+        } finally {
+            closeConnection();
+        }
+    }
 
     @Override
     public void update(Drivers driver) {

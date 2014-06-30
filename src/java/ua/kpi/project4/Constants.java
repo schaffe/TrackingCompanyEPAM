@@ -19,13 +19,14 @@ public interface Constants {
         String APPLICATION_DETAILS = "./applicationDetails.jsp";
         String DRIVERS = "./drivers.jsp";
         String CARS = "./cars.jsp";
-
+        String TRUCK_FINISHED = "./truckFinished.jsp";
     }
 
     public interface SessionParameters {
 
         String PROFILE_ID = "profile_id";
         String USER_ID = "user_id";
+        String DRIVER_ID = "driver_id";
     }
 
     public interface RequestParameters {
@@ -55,8 +56,9 @@ public interface Constants {
         SET_DRIVER,
         SHOW_CARS,
         SET_CAR,
-        START_TRUCKING
-        
+        START_TRUCKING,
+        TRUCK_FINISHED,
+        REPAIR_CAR
     }
 
     public enum Profiles {

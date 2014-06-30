@@ -65,15 +65,22 @@ public class MySqlApplicationsDaoImpl implements ApplicationsDAO {
                 ResultSet result = statement.executeQuery()) {
             List<Applications> applicationList = new ArrayList<>();
             while (result.next()) {
+                DaoFactory daoFactory = DaoFactory.getDaoFactory();
+                Drivers driver = null;
+                if (result.getInt(DRIVER_ID) != 0) {
+                    driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(result.getInt(DRIVER_ID));
+                }
+                UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(CREATOR_ID));
+
                 Applications application = new Applications(
                         result.getInt(ID),
-                        new UserAccounts(result.getInt(CREATOR_ID)),
+                        account,
                         result.getString(FROM),
                         result.getString(DESTINATION),
                         new java.util.Date(result.getDate(ARRIVAL_TIME).getTime()),
                         result.getInt(PASSENGERS_NUM),
                         result.getString(STATUS),
-                        new Drivers(result.getInt(DRIVER_ID)),
+                        driver,
                         new java.util.Date(result.getDate(DATE_CREATE).getTime())
                 );
                 Logger.getLogger(MySqlApplicationsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);

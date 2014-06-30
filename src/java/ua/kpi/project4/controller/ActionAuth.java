@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import ua.kpi.project4.Constants;
 import ua.kpi.project4.dao.DaoFactory;
+import ua.kpi.project4.model.Drivers;
 import ua.kpi.project4.model.UserAccounts;
 
 /**
@@ -33,6 +34,11 @@ public class ActionAuth implements Action {
                 session.setAttribute(RequestParameters.FULLNAME, name);
                 session.setAttribute(SessionParameters.USER_ID, userId);
                 session.setAttribute(SessionParameters.PROFILE_ID, account.getProfile());
+                
+                if (account.getProfile().equals(Profiles.DRIVER.name())) {
+                    Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getByUserAccount(account.getUserAccountId());
+                    session.setAttribute(SessionParameters.DRIVER_ID, driver.getDriverId());
+                }
                 return Pages.WELCOME_PAGE;
             }
         } catch (IllegalArgumentException e) {

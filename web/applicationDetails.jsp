@@ -10,6 +10,9 @@
 <c:set var='param_application' value="<%=Constants.RequestParameters.APPLICATION%>" />
 <c:set var='param_profile' value="<%=Constants.SessionParameters.PROFILE_ID%>" />
 <c:set var='param_profile_DISPATCHER' value="<%=Constants.Profiles.DISPATCHER%>" />
+<c:set var='param_profile_DRIVER' value="<%=Constants.Profiles.DRIVER%>" />
+<c:set var='param_status_PROCESSED' value="<%=Constants.ApplicationStatus.PROCESSED%>" />
+<c:set var='param_status_TRUCKING' value="<%=Constants.ApplicationStatus.TRUCKING%>" />
 
 <c:set var="profile" value="${sessionScope[param_profile]}" />
 <c:set var="application" value="${requestScope[param_application]}" />
@@ -51,6 +54,27 @@
                 <fmt:message key="epam.a.choose_driver" var="buttonDriver" />
                 <input type="submit" value="${buttonDriver}">
             </form>
+        </c:if>
+        <c:if test="${profile == param_profile_DRIVER}">
+            <c:choose>
+                <c:when test="${application.status == param_status_PROCESSED}">
+                    <form action="<%=Constants.ACTION%>" method="POST">
+                        <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.START_TRUCKING%>">
+                        <input type="hidden" name="<%=Constants.RequestParameters.APPLICATION%>" value="${application.applicationId}">
+                        <input type="hidden" name="<%=Constants.RequestParameters.DRIVER%>" value="${application.driver.driverId}">
+
+                        <fmt:message key="epam.a.start_trucking" var="buttonDriver" />
+                        <input type="submit" value="${buttonDriver}">
+                    </form>
+                </c:when>
+                <c:when test="${application.status == param_status_TRUCKING}">
+                    <form action="<%=Constants.Pages.TRUCK_FINISHED%>">
+                        <input type="hidden" name="<%=Constants.RequestParameters.APPLICATION%>" value="${application.applicationId}">
+                        <fmt:message key="epam.a.finish_trucking" var="buttonDriver" />
+                        <input type="submit" value="${buttonDriver}">
+                    </form>
+                </c:when>
+            </c:choose>
         </c:if>
 
         <!-- Back button -->
