@@ -20,8 +20,8 @@
         <c:set var='profile_param' value="<%=Constants.SessionParameters.PROFILE_ID%>" />
         <fmt:message key="epam.welcome.welcome"/> <c:out value="${sessionScope[fullname_param]}"/><br>
         <fmt:message key="epam.welcome.logged_as"/> <c:out value="${sessionScope[profile_param]}"/><br>
-        <a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_ALL_APPLICATIONS%>">Show all applications</a>
-
+        <a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_ALL_APPLICATIONS%>"><fmt:message key="epam.welcome.applications"/></a><br>
+        <a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_DRIVERS%>"><fmt:message key="epam.welcome.drivers"/></a>
     </body>
 
 

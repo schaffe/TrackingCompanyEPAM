@@ -35,13 +35,13 @@
                 <tr><td><fmt:message key="epam.a.where"/></td>
                     <td><c:out value="${application.destination}" /></td></tr>
                 <tr><td><fmt:message key="epam.a.arrival_time"/></td>
-                    <td><c:out  value="${application.arrivalTime}" /></td></tr>
+                    <td><fmt:formatDate  value="${application.arrivalTime}" type="BOTH"/></td></tr>
                 <tr><td><fmt:message key="epam.a.places"/></td>
                     <td><c:out  value="${application.passengersNum}" /></td></tr>
                 <tr><td><fmt:message key="epam.a.driver"/></td>
                     <td><c:out  value="${application.driver.userAccount.fullName}" /></td></tr>
                 <tr><td><fmt:message key="epam.a.date_create"/></td>
-                    <td><c:out value="${application.dateCreate}" /></td></tr>
+                    <td><fmt:formatDate value="${application.dateCreate}" type="BOTH"/></td></tr>
             </table>
         </form>
         <c:if test="${profile == param_profile_DISPATCHER}">

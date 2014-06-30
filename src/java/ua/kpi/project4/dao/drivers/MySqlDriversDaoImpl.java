@@ -55,11 +55,9 @@ public class MySqlDriversDaoImpl implements DriversDao {
             List<Drivers> driverList = new ArrayList<>();
             while (result.next()) {
                 DaoFactory daoFactory = DaoFactory.getDaoFactory();
-                Cars car;
+                Cars car = null;
                 if (result.getInt(CAR_ID) != 0) {
                     car = daoFactory.getCarsDao(daoFactory.getConnection()).getById(result.getInt(CAR_ID));
-                } else {
-                    car = null;
                 }
                 UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(USER_ID));
 
@@ -94,7 +92,10 @@ public class MySqlDriversDaoImpl implements DriversDao {
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     DaoFactory daoFactory = DaoFactory.getDaoFactory();
-                    Cars car = daoFactory.getCarsDao(daoFactory.getConnection()).getById(result.getInt(CAR_ID));
+                    Cars car = null;
+                    if (result.getInt(CAR_ID) != 0) {
+                        car = daoFactory.getCarsDao(daoFactory.getConnection()).getById(result.getInt(CAR_ID));
+                    }
                     UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(USER_ID));
 
                     Drivers application = new Drivers(
@@ -126,9 +127,13 @@ public class MySqlDriversDaoImpl implements DriversDao {
         conditions.put(ID, "?");
         String[] fields = {CAR_ID};
         String query = MySqlUtility.createUpdateStatment(TABLE, conditions, fields);
-
+        int carId = 0;
+        if (driver.getCar() != null) {
+            carId = driver.getCar().getCarId();
+        }
+        
         try (PreparedStatement statment = connection.prepareStatement(query)) {
-            statment.setInt(1, driver.getCar().getCarId());
+            statment.setInt(1, carId);
             statment.setInt(2, driver.getDriverId());
             statment.executeUpdate();
             Logger.getLogger(MySqlDriversDaoImpl.class.getName()).info((new Date()).toString() + " " + statment);

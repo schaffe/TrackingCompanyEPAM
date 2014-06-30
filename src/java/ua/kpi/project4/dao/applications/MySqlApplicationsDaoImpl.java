@@ -70,11 +70,11 @@ public class MySqlApplicationsDaoImpl implements ApplicationsDAO {
                         new UserAccounts(result.getInt(CREATOR_ID)),
                         result.getString(FROM),
                         result.getString(DESTINATION),
-                        result.getDate(ARRIVAL_TIME),
+                        new java.util.Date(result.getDate(ARRIVAL_TIME).getTime()),
                         result.getInt(PASSENGERS_NUM),
                         result.getString(STATUS),
                         new Drivers(result.getInt(DRIVER_ID)),
-                        result.getDate(DATE_CREATE)
+                        new java.util.Date(result.getDate(DATE_CREATE).getTime())
                 );
                 Logger.getLogger(MySqlApplicationsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
                 applicationList.add(application);
@@ -102,19 +102,22 @@ public class MySqlApplicationsDaoImpl implements ApplicationsDAO {
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     DaoFactory daoFactory = DaoFactory.getDaoFactory();
-                    Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(result.getInt(DRIVER_ID));
+                    Drivers driver = null;
+                    if (result.getInt(DRIVER_ID) != 0) {
+                        driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(result.getInt(DRIVER_ID));
+                    }
                     UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(CREATOR_ID));
-                    
+
                     Applications application = new Applications(
                             result.getInt(ID),
                             account,
                             result.getString(FROM),
                             result.getString(DESTINATION),
-                            result.getDate(ARRIVAL_TIME),
+                            new java.util.Date(result.getDate(ARRIVAL_TIME).getTime()),
                             result.getInt(PASSENGERS_NUM),
                             result.getString(STATUS),
                             driver,
-                            result.getDate(DATE_CREATE)
+                            new java.util.Date(result.getDate(DATE_CREATE).getTime())
                     );
                     Logger.getLogger(MySqlApplicationsDaoImpl.class.getName()).info((new java.util.Date()).toString() + " " + statement);
 
@@ -143,7 +146,7 @@ public class MySqlApplicationsDaoImpl implements ApplicationsDAO {
             statment.setInt(2, applications.getCreatorUserAccount().getUserAccountId());
             statment.setString(3, applications.getFrom());
             statment.setString(4, applications.getDestination());
-            statment.setDate(5, new Date(applications.getArrivalTime().getTime()));
+            statment.setDate(5, new java.sql.Date(applications.getArrivalTime().getTime()));
             statment.setInt(6, applications.getPassengersNum());
 
             //Get orderId

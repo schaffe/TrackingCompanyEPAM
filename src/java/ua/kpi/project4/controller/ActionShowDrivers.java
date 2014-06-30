@@ -34,10 +34,17 @@ public class ActionShowDrivers implements Action {
 
                 for (Iterator<Drivers> it = drivers.iterator(); it.hasNext();) {
                     Drivers driver = it.next();
-                    Cars car = driver.getCar();
-                    if (application.getPassengersNum() > driver.getCar().getPlacesNumber()) {
+
+                    if (driver.getCar() != null) {
+                        if (application.getPassengersNum() <= driver.getCar().getPlacesNumber()) {
+                            continue;
+                        } else {
+                            it.remove();
+                        }
+                    } else {
                         it.remove();
                     }
+
                 }
                 request.setAttribute(RequestParameters.APPLICATION, application);
             }

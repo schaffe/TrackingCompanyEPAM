@@ -28,10 +28,10 @@
             <c:set var='application_list' value="<%=Constants.RequestParameters.APPLICATIONS%>" />
             <c:forEach var="application" items="${requestScope[application_list]}">
                 <tr>
-                    <td><c:out value="${application.dateCreate}"/></td>
+                    <td><fmt:formatDate value="${application.dateCreate}"/></td>
                     <td><c:out value="${application.from}"/></td>
                     <td><c:out value="${application.destination}"/></td>
-                    <td><c:out value="${application.arrivalTime}"/></td>
+                    <td><fmt:formatDate value="${application.arrivalTime}"/></td>
                     <td><c:out value="${application.passengersNum}"/></td>
                     <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.VIEW_APPLICATION%>&<%=Constants.RequestParameters.ID%>=${application.applicationId}">
                             <c:out value="${application.status}"/></a></td>
