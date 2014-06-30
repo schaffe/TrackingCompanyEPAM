@@ -55,7 +55,12 @@ public class MySqlDriversDaoImpl implements DriversDao {
             List<Drivers> driverList = new ArrayList<>();
             while (result.next()) {
                 DaoFactory daoFactory = DaoFactory.getDaoFactory();
-                Cars car = daoFactory.getCarsDao(daoFactory.getConnection()).getCarById(result.getInt(CAR_ID));
+                Cars car;
+                if (result.getInt(CAR_ID) != 0) {
+                    car = daoFactory.getCarsDao(daoFactory.getConnection()).getById(result.getInt(CAR_ID));
+                } else {
+                    car = null;
+                }
                 UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(USER_ID));
 
                 Drivers application = new Drivers(
@@ -89,7 +94,7 @@ public class MySqlDriversDaoImpl implements DriversDao {
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     DaoFactory daoFactory = DaoFactory.getDaoFactory();
-                    Cars car = daoFactory.getCarsDao(daoFactory.getConnection()).getCarById(result.getInt(CAR_ID));
+                    Cars car = daoFactory.getCarsDao(daoFactory.getConnection()).getById(result.getInt(CAR_ID));
                     UserAccounts account = daoFactory.getUserAccountsDAO(daoFactory.getConnection()).getById(result.getInt(USER_ID));
 
                     Drivers application = new Drivers(

@@ -27,6 +27,9 @@ public class ActionFactory implements Constants {
         actionMap.put(Commands.VIEW_APPLICATION, new ActionViewApplication());
         actionMap.put(Commands.SHOW_DRIVERS, new ActionShowDrivers());
         actionMap.put(Commands.SET_DRIVER, new ActionSetDriver());
+        actionMap.put(Commands.SET_CAR, new ActionSetCar());
+        actionMap.put(Commands.SHOW_CARS, new ActionShowCars());
+
     }
 
     public Action getAction(HttpServletRequest request) {

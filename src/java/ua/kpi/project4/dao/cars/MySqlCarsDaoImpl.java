@@ -40,7 +40,7 @@ public class MySqlCarsDaoImpl implements CarsDAO {
     }
 
     @Override
-    public List<Cars> getAllCars() {
+    public List<Cars> getAll() {
 
         String[] tables = new String[]{TABLE};
         LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
@@ -71,7 +71,7 @@ public class MySqlCarsDaoImpl implements CarsDAO {
     }
 
     @Override
-    public Cars getCarById(int id) {
+    public Cars getById(int id) {
 
         String[] tables = new String[]{TABLE};
         LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
@@ -108,7 +108,7 @@ public class MySqlCarsDaoImpl implements CarsDAO {
     }
 
     @Override
-    public void updateCar(Cars car) {
+    public void update(Cars car) {
 
         LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
         conditions.put(ID, "?");

@@ -32,7 +32,8 @@
                     <td><c:out value="${driver.userAccount.fullName}"/></td>
                     <td><c:out value="${driver.car.model}"/></td>
                     <td><c:out value="${driver.car.placesNumber}"/></td>
-                    <td>Edit</td>
+                    <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_CARS%>&<%=Constants.RequestParameters.DRIVER%>=${driver.driverId}&<%=Constants.RequestParameters.APPLICATION%>=${application.applicationId}">
+                            <fmt:message key="epam.text.edit"/></a></td>
                     <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SET_DRIVER%>&<%=Constants.RequestParameters.APPLICATION%>=${application.applicationId}&<%=Constants.RequestParameters.DRIVER%>=${driver.driverId}">
                             <fmt:message key="epam.text.set"/></a></td>
                 </tr>

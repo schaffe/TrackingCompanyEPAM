@@ -18,6 +18,8 @@ public interface Constants {
         String APPLICATIONS = "./applications.jsp";
         String APPLICATION_DETAILS = "./applicationDetails.jsp";
         String DRIVERS = "./drivers.jsp";
+        String CARS = "./cars.jsp";
+
     }
 
     public interface SessionParameters {
@@ -38,12 +40,8 @@ public interface Constants {
         String ID = "id";
         String LIST = "list";
         String DRIVER = "driver";
-        
-        public enum ApplicationParam {
-            CREATE,
-            EDIT,
-            VIEW
-        }
+        String CAR = "car";
+
     }
 
     public enum Commands {
@@ -54,7 +52,9 @@ public interface Constants {
         SHOW_ALL_APPLICATIONS,
         VIEW_APPLICATION,
         SHOW_DRIVERS,
-        SET_DRIVER
+        SET_DRIVER,
+        SHOW_CARS,
+        SET_CAR
     }
 
     public enum Profiles {
@@ -67,10 +67,10 @@ public interface Constants {
     public enum ApplicationStatus {
 
         PENDING,
-        PROCESSED, 
-        TRUCKING, 
-        POSTPONED, 
-        CANCELLED, 
+        PROCESSED,
+        TRUCKING,
+        POSTPONED,
+        CANCELLED,
         DONE
     }
 
