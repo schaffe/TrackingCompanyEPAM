@@ -11,8 +11,7 @@ import ua.kpi.project4.model.Cars;
 import ua.kpi.project4.model.Drivers;
 
 /**
- *
- * @author User
+ * Action set car is used to set proper car to proper user.
  */
 public class ActionSetCar implements Action {
 
@@ -27,7 +26,7 @@ public class ActionSetCar implements Action {
                 DaoFactory daoFactory = DaoFactory.getDaoFactory();
                 Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(driverId);
                 Cars car = daoFactory.getCarsDao(daoFactory.getConnection()).getById(carId);
-                
+
                 if (car.getIsValid()) {
                     driver.setCar(car);
                     daoFactory.getDriversDao(daoFactory.getConnection()).update(driver);
@@ -35,7 +34,6 @@ public class ActionSetCar implements Action {
                     //TODO error!
                 }
             }
-            
 
         } catch (IllegalArgumentException e) {
         }

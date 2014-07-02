@@ -12,8 +12,9 @@ import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.Applications;
 
 /**
- *
- * @author User
+ * Action is used for output list of application. Applications are selected in
+ * according to user`s profile i.e. drivers will receive list of his trucks,
+ * customer will receive list of his applications.
  */
 public class ActionShowAllApllications implements Action {
 

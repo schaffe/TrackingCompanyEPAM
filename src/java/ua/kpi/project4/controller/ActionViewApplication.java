@@ -5,14 +5,12 @@
  */
 package ua.kpi.project4.controller;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.Applications;
 
 /**
- *
- * @author User
+ * Action is used for displaying application.
  */
 public class ActionViewApplication implements Action {
 

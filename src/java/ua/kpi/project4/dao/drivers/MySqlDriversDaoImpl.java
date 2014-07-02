@@ -17,10 +17,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.dao.MySqlUtility;
-import ua.kpi.project4.dao.applications.*;
-import static ua.kpi.project4.dao.applications.MySqlApplicationsDaoImpl.DRIVER_ID;
-import ua.kpi.project4.dao.cars.*;
-import ua.kpi.project4.model.Applications;
 import ua.kpi.project4.model.Cars;
 import ua.kpi.project4.model.Drivers;
 import ua.kpi.project4.model.UserAccounts;
@@ -119,7 +115,7 @@ public class MySqlDriversDaoImpl implements DriversDao {
             closeConnection();
         }
     }
-    
+
     @Override
     public Drivers getByUserAccount(int id) {
 
@@ -173,7 +169,7 @@ public class MySqlDriversDaoImpl implements DriversDao {
         if (driver.getCar() != null) {
             carId = driver.getCar().getCarId();
         }
-        
+
         try (PreparedStatement statment = connection.prepareStatement(query)) {
             statment.setInt(1, carId);
             statment.setInt(2, driver.getDriverId());

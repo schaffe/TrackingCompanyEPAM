@@ -18,7 +18,8 @@ import ua.kpi.project4.dao.useraccounts.MySqlUserAccountsDaoImpl;
 import ua.kpi.project4.dao.useraccounts.UserAccountsDAO;
 
 /**
- * MySqlDaoFactory class.
+ * MySqlDaoFactory class. Implemented DaoFactory and used to store DB pool,
+ * receive DAOs.
  *
  * @author Artur Dzidzoiev
  * @version May 21, 2014

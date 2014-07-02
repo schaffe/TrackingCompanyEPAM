@@ -5,14 +5,11 @@
  */
 package ua.kpi.project4.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author User
+ * Class for storing HttpServletRequest and HttpServletResponse data.
  */
 public class View {
 
@@ -31,6 +28,5 @@ public class View {
     public HttpServletResponse getResponse() {
         return response;
     }
-    
-    
+
 }

@@ -8,12 +8,9 @@ package ua.kpi.project4.controller;
 import javax.servlet.http.HttpServletRequest;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.Applications;
-import ua.kpi.project4.model.Cars;
-import ua.kpi.project4.model.Drivers;
 
 /**
- *
- * @author User
+ * Action is used by driver for messaging about truck starting.
  */
 public class ActionStartTrucking implements Action {
 

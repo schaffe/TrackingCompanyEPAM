@@ -4,6 +4,11 @@
 <%@ page import="ua.kpi.project4.Constants" %>
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="bundle" />
+<c:set var='list' value="<%=Constants.RequestParameters.LIST%>" />
+<c:set var='drivers' value="${requestScope[list]}" />
+<c:set var='application_attr' value="<%=Constants.RequestParameters.APPLICATION%>" />
+<c:set var='application' value="${requestScope[application_attr]}" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,12 +17,6 @@
     </head>
     <body>
         <%@include file="/WEB-INF/jspf/headerButtons.jspf" %>
-
-        <c:set var='list' value="<%=Constants.RequestParameters.LIST%>" />
-        <c:set var='drivers' value="${requestScope[list]}" />
-        <c:set var='application_attr' value="<%=Constants.RequestParameters.APPLICATION%>" />
-        <c:set var='application' value="${requestScope[application_attr]}" />
-
         <c:choose>
             <c:when test="${empty drivers}">
                 <fmt:message key="epam.d.empty"/>

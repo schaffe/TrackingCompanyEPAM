@@ -10,12 +10,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.Applications;
-import ua.kpi.project4.model.Cars;
 import ua.kpi.project4.model.Drivers;
 
 /**
- *
- * @author User
+ * Action is used for displaying list of drivers.
  */
 public class ActionShowDrivers implements Action {
 
@@ -36,7 +34,7 @@ public class ActionShowDrivers implements Action {
                     Drivers driver = it.next();
 
                     if (driver.getCar() != null) {
-                        if (application.getPassengersNum() <= driver.getCar().getPlacesNumber()) {
+                        if (application.getPassengersNum() <= driver.getCar().getPlacesNumber() && driver.getCar().getIsValid()) {
                             continue;
                         } else {
                             it.remove();

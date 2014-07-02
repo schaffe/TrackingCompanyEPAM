@@ -9,8 +9,6 @@ import java.util.LinkedHashMap;
 
 /**
  * Helper class for MySQL DAO issues
- *
- * @author Lesha
  */
 public final class MySqlUtility {
 

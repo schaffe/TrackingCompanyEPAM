@@ -6,15 +6,13 @@
 package ua.kpi.project4.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
- *
- * @author User
+ * Entity model of table Drivers.
  */
 public class Drivers implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 548847L;
     private Integer driverId;
     private UserAccounts userAccount;
     private Cars car;

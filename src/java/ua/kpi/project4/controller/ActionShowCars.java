@@ -13,8 +13,7 @@ import ua.kpi.project4.model.Cars;
 import ua.kpi.project4.model.Drivers;
 
 /**
- *
- * @author User
+ * Action is used for displaying cars.
  */
 public class ActionShowCars implements Action {
 
@@ -33,7 +32,7 @@ public class ActionShowCars implements Action {
 
                 if (request.getParameter(RequestParameters.APPLICATION) != null) {
                     request.setAttribute(RequestParameters.APPLICATION, Integer.valueOf(request.getParameter(RequestParameters.APPLICATION)));
-                    
+
                     for (Iterator<Cars> it = cars.iterator(); it.hasNext();) {
                         Cars car = it.next();
                         if (!car.getIsValid()) {

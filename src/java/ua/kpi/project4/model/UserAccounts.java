@@ -9,12 +9,11 @@ import java.io.Serializable;
 import ua.kpi.project4.Constants;
 
 /**
- *
- * @author User
+ * Entity model of table UserAccounts.
  */
 public class UserAccounts implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 463385L;
     private Integer userAccountId;
     private String fullName;
     private String login;
@@ -35,8 +34,6 @@ public class UserAccounts implements Serializable {
         this.password = password;
         this.profile = Constants.Profiles.valueOf(profile);
     }
-
-
 
     public Integer getUserAccountId() {
         return userAccountId;
@@ -78,7 +75,6 @@ public class UserAccounts implements Serializable {
         this.profile = profile;
     }
 
-   
     @Override
     public int hashCode() {
         int hash = 0;

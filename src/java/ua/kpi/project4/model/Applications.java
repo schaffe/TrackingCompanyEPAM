@@ -7,16 +7,14 @@ package ua.kpi.project4.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import ua.kpi.project4.Constants;
 
 /**
- *
- * @author User
+ * Entity model of table Applications.
  */
 public class Applications implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6346422742L;
 
     private Integer applicationId;
     private UserAccounts creatorUserAccount;
@@ -31,12 +29,20 @@ public class Applications implements Serializable {
     public Applications() {
     }
 
+    public Applications(UserAccounts creatorUserAccount, String from, String destination, Date arrivalTime, int passengersNum) {
+        this.creatorUserAccount = creatorUserAccount;
+        this.from = from;
+        this.destination = destination;
+        this.arrivalTime = arrivalTime;
+        this.passengersNum = passengersNum;
+    }
+
     public Applications(Integer applicationId) {
         this.applicationId = applicationId;
     }
 
-    public Applications(Integer applicationId, UserAccounts creatorUserAccount, 
-            String from, String destination, Date arrivalTime, int passengersNum, 
+    public Applications(Integer applicationId, UserAccounts creatorUserAccount,
+            String from, String destination, Date arrivalTime, int passengersNum,
             String status, Drivers driver, Date dateCreate) {
         this.applicationId = applicationId;
         this.creatorUserAccount = creatorUserAccount;
@@ -105,7 +111,6 @@ public class Applications implements Serializable {
         this.driver = driver;
     }
 
-
     public String getStatus() {
         return status.name();
     }
@@ -113,7 +118,6 @@ public class Applications implements Serializable {
     public void setStatus(String status) {
         this.status = Constants.ApplicationStatus.valueOf(status);
     }
-
 
     public Date getDateCreate() {
         return dateCreate;
@@ -123,7 +127,6 @@ public class Applications implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -138,8 +141,8 @@ public class Applications implements Serializable {
             return false;
         }
         Applications other = (Applications) object;
-        if ((this.applicationId == null && other.applicationId != null) || 
-                (this.applicationId != null && !this.applicationId.equals(other.applicationId))) {
+        if ((this.applicationId == null && other.applicationId != null)
+                || (this.applicationId != null && !this.applicationId.equals(other.applicationId))) {
             return false;
         }
         return true;

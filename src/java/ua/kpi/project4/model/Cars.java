@@ -3,26 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ua.kpi.project4.model;
 
 import java.io.Serializable;
-import java.util.List;
-
 
 /**
- *
- * @author User
+ * Entity model of table Cars.
  */
 public class Cars implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
+
+    private static final long serialVersionUID = 29533835L;
+
     private Integer carId;
     private String registrationNumber;
     private int placesNumber;
     private Boolean isValid;
     private String model;
-    
+
     public Cars() {
     }
 
@@ -45,7 +42,6 @@ public class Cars implements Serializable {
     public void setModel(String model) {
         this.model = model;
     }
-    
 
     public Integer getCarId() {
         return carId;
@@ -79,7 +75,6 @@ public class Cars implements Serializable {
         this.isValid = isValid;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -104,5 +99,5 @@ public class Cars implements Serializable {
     public String toString() {
         return "ua.kpi.project4.model.Cars[ carId=" + carId + " ]";
     }
-    
+
 }

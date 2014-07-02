@@ -4,6 +4,10 @@
 <%@ page import="ua.kpi.project4.Constants" %>
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="bundle" />
+<c:set var='application_attr' value="<%=Constants.RequestParameters.APPLICATION%>" />
+<c:set var='application' value="${requestScope[application_attr]}" />
+<c:set var='list' value="<%=Constants.RequestParameters.LIST%>" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,9 +27,6 @@
                 <th></th>
             </tr>
 
-            <c:set var='application_attr' value="<%=Constants.RequestParameters.APPLICATION%>" />
-            <c:set var='application' value="${requestScope[application_attr]}" />
-            <c:set var='list' value="<%=Constants.RequestParameters.LIST%>" />
             <fmt:message key="epam.text.true" var="yes"/>    
             <fmt:message key="epam.text.false" var="no"/>    
 
@@ -37,9 +38,9 @@
                             <td><c:out value="${car.placesNumber}"/></td>
                             <td><c:out value="${car.isValid == 'true' ? yes : no}"/></td>
                             <c:if test="${car.isValid == 'true'}">
-                            <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SET_CAR%>&<%=Constants.RequestParameters.DRIVER%>=${driver.driverId}&<%=Constants.RequestParameters.CAR%>=${car.carId}">
-                                    <fmt:message key="epam.text.set"/></a></td>
-                            </c:if>
+                                <td><a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SET_CAR%>&<%=Constants.RequestParameters.DRIVER%>=${driver.driverId}&<%=Constants.RequestParameters.CAR%>=${car.carId}">
+                                        <fmt:message key="epam.text.set"/></a></td>
+                                    </c:if>
                         </tr>
                     </c:forEach>
                 </table>

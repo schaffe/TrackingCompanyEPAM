@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ua.kpi.project4.controller;
 
 /**
- *
- * @author User
+ * Represents null action.
  */
 public class ActionNoAction implements Action {
 
@@ -16,5 +14,5 @@ public class ActionNoAction implements Action {
     public String execute(View view) {
         return Pages.INDEX;
     }
-    
+
 }

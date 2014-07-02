@@ -3,23 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ua.kpi.project4.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import ua.kpi.project4.Constants;
 
 /**
- *
- * @author User
+ * Destroys current session and redirects to login page
  */
 public class ActionLogout implements Action {
-    
+
     @Override
-    public String execute(View view){
+    public String execute(View view) {
         HttpSession session = view.getRequest().getSession();
         session.invalidate();
         return Pages.INDEX;
-    }   
+    }
 }

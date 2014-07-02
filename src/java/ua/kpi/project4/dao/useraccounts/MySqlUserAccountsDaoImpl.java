@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

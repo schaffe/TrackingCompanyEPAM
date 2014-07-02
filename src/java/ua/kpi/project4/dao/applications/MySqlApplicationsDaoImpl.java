@@ -6,7 +6,6 @@
 package ua.kpi.project4.dao.applications;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,7 +58,7 @@ public class MySqlApplicationsDaoImpl implements ApplicationsDAO {
         String[] tables = new String[]{TABLE};
         LinkedHashMap<String, String> conditions = new LinkedHashMap<>();
         String[] fields = {ID, CREATOR_ID, FROM, DESTINATION, ARRIVAL_TIME, PASSENGERS_NUM, STATUS, DRIVER_ID, DATE_CREATE};
-        String sql = MySqlUtility.createSelectStatment(tables, conditions, fields);
+        String sql = MySqlUtility.createSelectStatment(tables, conditions, fields) + " ORDER BY " + DATE_CREATE;
 
         try (PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet result = statement.executeQuery()) {
@@ -146,15 +145,14 @@ public class MySqlApplicationsDaoImpl implements ApplicationsDAO {
     @Override
     public int insertApplications(Applications applications) {
         int insertedKey = 0;
-        String query = MySqlUtility.createInsertStatment(TABLE, ID, CREATOR_ID, FROM, DESTINATION, ARRIVAL_TIME, PASSENGERS_NUM);
+        String query = MySqlUtility.createInsertStatment(TABLE, CREATOR_ID, FROM, DESTINATION, ARRIVAL_TIME, PASSENGERS_NUM);
 
         try (PreparedStatement statment = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);) {
-            statment.setInt(1, applications.getApplicationId());
-            statment.setInt(2, applications.getCreatorUserAccount().getUserAccountId());
-            statment.setString(3, applications.getFrom());
-            statment.setString(4, applications.getDestination());
-            statment.setDate(5, new java.sql.Date(applications.getArrivalTime().getTime()));
-            statment.setInt(6, applications.getPassengersNum());
+            statment.setInt(1, applications.getCreatorUserAccount().getUserAccountId());
+            statment.setString(2, applications.getFrom());
+            statment.setString(3, applications.getDestination());
+            statment.setDate(4, new java.sql.Date(applications.getArrivalTime().getTime()));
+            statment.setInt(5, applications.getPassengersNum());
 
             //Get orderId
             int result = statment.executeUpdate();

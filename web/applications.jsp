@@ -4,6 +4,8 @@
 <%@ page import="ua.kpi.project4.Constants" %>
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="bundle" />
+<c:set var='application_list' value="<%=Constants.RequestParameters.APPLICATIONS%>" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +27,6 @@
                 <th><fmt:message key="epam.a.status"/></th>
             </tr>
 
-            <c:set var='application_list' value="<%=Constants.RequestParameters.APPLICATIONS%>" />
             <c:forEach var="application" items="${requestScope[application_list]}">
                 <tr>
                     <td><fmt:formatDate value="${application.dateCreate}"/></td>

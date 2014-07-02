@@ -5,8 +5,6 @@
  */
 package ua.kpi.project4.controller;
 
-import java.util.Iterator;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import ua.kpi.project4.dao.DaoFactory;
 import ua.kpi.project4.model.Applications;
@@ -14,8 +12,7 @@ import ua.kpi.project4.model.Cars;
 import ua.kpi.project4.model.Drivers;
 
 /**
- *
- * @author User
+ * Action "Set driver" is used for setting some driver for some application.
  */
 public class ActionSetDriver implements Action {
 
@@ -31,7 +28,7 @@ public class ActionSetDriver implements Action {
                 Drivers driver = daoFactory.getDriversDao(daoFactory.getConnection()).getById(driverId);
                 Applications application = daoFactory.getApplicationsDAO(daoFactory.getConnection()).getApplicationsById(applicationId);
                 Cars car = driver.getCar();
-                
+
                 if (car.getIsValid() && application.getPassengersNum() <= car.getPlacesNumber()) {
                     application.setDriver(driver);
                     application.setStatus(ApplicationStatus.PROCESSED.name());
@@ -39,7 +36,7 @@ public class ActionSetDriver implements Action {
                 } else {
                     //TODO error!
                 }
-                
+
                 request.setAttribute(RequestParameters.APPLICATION, application);
             }
 

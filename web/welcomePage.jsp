@@ -9,6 +9,7 @@
 <c:set var='param_profile' value="<%=Constants.SessionParameters.PROFILE_ID%>" />
 <c:set var='param_profile_DISPATCHER' value="<%=Constants.Profiles.DISPATCHER%>" />
 <c:set var='param_profile_DRIVER' value="<%=Constants.Profiles.DRIVER%>" />
+<c:set var='param_profile_CUSTOMER' value="<%=Constants.Profiles.CUSTOMER%>" />
 
 <c:set var="profile" value="${sessionScope[param_profile]}" />
 
@@ -28,6 +29,9 @@
         <a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_ALL_APPLICATIONS%>"><fmt:message key="epam.welcome.applications"/></a><br>
         <c:if test="${profile == param_profile_DISPATCHER}">
             <a href="${pageContext.request.contextPath}/<%=Constants.ACTION%>?<%=Constants.RequestParameters.COMMAND_STR%>=<%=Constants.Commands.SHOW_DRIVERS%>"><fmt:message key="epam.welcome.drivers"/></a>
+        </c:if>
+        <c:if test="${profile == param_profile_CUSTOMER}">
+            <a href="${pageContext.request.contextPath}/<%=Constants.Pages.CREATE_APPLICATION%>"><fmt:message key="epam.a.create"/></a>
         </c:if>
     </body>
 
