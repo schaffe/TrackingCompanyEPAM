@@ -13,6 +13,8 @@
 <c:set var='param_profile_DRIVER' value="<%=Constants.Profiles.DRIVER%>" />
 <c:set var='param_status_PROCESSED' value="<%=Constants.ApplicationStatus.PROCESSED%>" />
 <c:set var='param_status_TRUCKING' value="<%=Constants.ApplicationStatus.TRUCKING%>" />
+<c:set var='param_status_PENDING' value="<%=Constants.ApplicationStatus.PENDING%>" />
+
 
 <c:set var="profile" value="${sessionScope[param_profile]}" />
 <c:set var="application" value="${requestScope[param_application]}" />
@@ -47,7 +49,7 @@
                     <td><fmt:formatDate value="${application.dateCreate}" type="BOTH"/></td></tr>
             </table>
         </form>
-        <c:if test="${profile == param_profile_DISPATCHER}">
+        <c:if test="${profile == param_profile_DISPATCHER and (application.status == param_status_PENDING or application.status == param_status_PROCESSED)}">
             <form action="<%=Constants.ACTION%>" method="POST">
                 <input type="hidden" name="<%=Constants.RequestParameters.COMMAND_STR%>" value="<%=Constants.Commands.SHOW_DRIVERS%>">
                 <input type="hidden" name="<%=Constants.RequestParameters.APPLICATION%>" value="${application.applicationId}">
